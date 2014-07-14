@@ -32,7 +32,7 @@ LIBRPG		=	-L./src/RPG -lRPG
 LIBBASIC	=	-L./src/basics -lbasic
 LIBX11		=	-L/usr/X11/lib -lXext -lX11
 LIBMLX		=	-L./src/minilibx -lmlx
-LIBGRAPHIC	=	$(LIBX11) $(LIBBASIC) $(LIBMLX)
+LIBGRAPHIC	=	$(LIBX11) $(LIBBASIC) $(LIBMLX) -lncurses
 
 LIBFLAG		=	$(LIBESSENTIAL) $(LIBGRAPHIC) $(LIBRPG)
 
