@@ -1,0 +1,102 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   thread.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hvillain <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/07/03 05:31:29 by hvillain          #+#    #+#             */
+/*   Updated: 2014/07/05 20:02:10 by hvillain         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <philo.h>
+#include <pthread.h>
+#include <stdio.h>
+
+void	check_states(t_philo *elem)
+{
+	if (elem->state == THINK)
+	{
+		if (!pthread_mutex_lock(elem->fork_right))
+		{
+			elem->state = EAT;
+			elem->time = time(NULL);
+			elem->last_time = time(NULL);
+		}
+	}
+	else if (elem->state == REST)
+	{
+		if (!pthread_mutex_trylock(elem->fork_left))
+		{
+			elem->state = THINK;
+			elem->time = time(NULL);
+			elem->last_time = time(NULL);
+		}
+	}
+}
+
+void	check_time(t_philo *elem)
+{
+	if (elem->state != EAT)
+	{
+		if ((elem->last_time + 1) > (int)time(NULL))
+		{
+			elem->life--;
+			printf("%d\n", (int)time(NULL));
+			//printf("%d\n", elem->life);
+			elem->last_time = (int)time(NULL);
+
+		}
+	}
+}
+
+void	eat_t_check(t_philo *elem)
+{
+	if (elem->state == EAT)
+	{
+		if (elem->time + EAT_T >= time(NULL))
+		{
+			elem->life = MAX_LIFE;
+			elem->state = REST;
+			elem->time = time(NULL);
+			elem->last_time = time(NULL);
+		}
+		else
+			usleep(250);
+	}
+}
+
+void	start_thinking(void *elem)
+{
+	while (1)
+		print_philo((t_philo *)elem);
+	/*while (!manage_community("get", 0))
+	{
+		print_philo((t_philo *)elem);
+		eat_t_check((t_philo *)elem);
+		check_time((t_philo *)elem);
+		check_states((t_philo *)elem);
+		if (((t_philo *)elem)->life <= 0)
+			manage_community("set", 1);
+	}*/
+}
+
+void	thread_init(void)
+{
+	t_philo		*p_head;
+	t_philo		*philo_head;
+	int			i;
+
+	i = 1;	
+	p_head = manage_philo_list("get", NULL);
+	philo_head = p_head;
+	while (i || philo_head != p_head)
+	{
+		i = 0;
+		pthread_create(philo_head->thread, NULL, (void *)start_thinking, (void *)philo_head);
+		pthread_join(*(philo_head->thread), NULL); 
+		philo_head = philo_head->next;
+	}
+	write(1, "done", 5);
+}
