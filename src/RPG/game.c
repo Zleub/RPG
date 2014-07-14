@@ -10,7 +10,9 @@ void        taverne(t_heros *character)
     ft_printf("(S)hop.\n");
     if (!(get_next_line(1, &str)))
         return (0);
-
+    else if (str[0] == 'S')
+        sleep()
+    else if (str[0] == 'H')
 }
 
 void        game(t_heros *character)
