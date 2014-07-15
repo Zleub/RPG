@@ -15,8 +15,9 @@ LIB			=	ft
 HEADDIR		=	 ../../inc
 
 SRC			=	curse.c \
-					manage_win.c \
-					manage_win_list.c
+				wintab.c \
+				manage_win.c \
+				manage_win_list.c
 
 OBJ			= $(subst .c,.o,$(SRC))
 

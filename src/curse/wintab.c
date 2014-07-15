@@ -1,28 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   manage_win.c                                       :+:      :+:    :+:   */
+/*   wintab.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/07/15 14:55:47 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/15 19:39:52 by adebray          ###   ########.fr       */
+/*   Created: 2014/07/15 19:39:32 by adebray           #+#    #+#             */
+/*   Updated: 2014/07/15 19:55:47 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <curse.h>
-
-WINDOW	*manage_win(int macro, WINTAB array)
+WINTAB		create_wintab(int i, int j, int x, int y)
 {
-	static WINDOW	*ptr;
+	WINTAB	array;
+
+	if (!(array = (WINTAB)malloc(sizeof(int) * 4)))
+		return (NULL);
+	array[0] = i;
+	array[1] = j;
+	array[2] = x;
+	array[3] = y;
+	manage_wintab_list(ADD, array);
+	return (array);
+}
+
+WINTAB		manage_wintab_list(int macro, WINTAB array)
+{
+	static WINTABLIST	head;
 
 	if (macro == GET)
-		return (ptr);
+		return (head);
 	else if (macro == SET)
-		ptr = object;
+		head = object;
 	else if (macro == NEW)
-		ptr = create_newwin(height, width, starty, startx);
+		head = create_wintab(0, 0, 0, 0);
+	else if (macro == ADD)
+		add_wintab_list(head, array);
 	else
 		ft_printf("Useless call to manage_win\n");
-	return (NULL);
 }

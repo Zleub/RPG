@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/07/15 14:52:25 by adebray           #+#    #+#             */
+/*   Updated: 2014/07/15 20:12:06 by adebray          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <RPG.h>
 
 int					ft_hash(char *line)
@@ -37,7 +49,7 @@ int					main(void)
 {
 	// STRING			str;
 	// t_heros			*load_char;
-	//
+
 	// printf("Hi. What's your name ?\n");
 	// if (!(get_next_line(1, &str)))
 	// 	return (0);
@@ -47,31 +59,22 @@ int					main(void)
 	// 	new_char(str);
 	// return (0);
 
-	// WINDOW		*mainwin;
-	//
-	// if ((mainwin = initscr()) == NULL)
-	// {
-	// 	fprintf(stderr, "Error initialising ncurses.\n");
-	// 	exit(EXIT_FAILURE);
-  // }
+	WINDOW		*mainwin;
+
+	if ((mainwin = initscr()) == NULL)
+	{
+		fprintf(stderr, "Error initialising ncurses.\n");
+		exit(EXIT_FAILURE);
+	}
 
 	manage_ncurses(SET);
 
-	int x = 0;
+	manage_win(NEW, create_wintab(10, 10, 0, 0));
 
-	while (x < 13)
-	{
-		clear();
-    	mvprintw(x, 33, "Hello, world: %d", x);
-		// int wborder(mainwin, '*', '*', '*', '*', 0, 0, 10, 10);
-		refresh();
-		x += 1;
-		usleep(100 * 1000);
-	}
 
 	sleep(1);
-  endwin();
-  delwin(manage_ncurses(GET));
-  refresh();
-  return (0);
+	endwin();
+	delwin(manage_ncurses(GET));
+	refresh();
+	return (0);
 }
