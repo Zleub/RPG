@@ -49,17 +49,12 @@ int					main(void)
 	// 	new_char(str);
 	// return (0);
 
-	WINDOW * mainwin;
-
-
-    /*  Initialize ncurses  */
-
+	WINDOW		*mainwin;
     if ((mainwin = initscr()) == NULL)
 	{
 		fprintf(stderr, "Error initialising ncurses.\n");
 		exit(EXIT_FAILURE);
     }
-
 	int x = 0;
 	while (x < 13)
 	{
