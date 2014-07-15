@@ -20,4 +20,3 @@ void        game(t_heros *character)
     if (!ft_strcmp(character->location, "Taverne"))
         taverne(character);
 }
-&

@@ -29,18 +29,16 @@ LIBESSENTIAL =	$(LIBLIBFT) $(LIBPRINTF)
 
 LIBRPG		=	-L./src/RPG -lRPG
 
-LIBBASIC	=	-L./src/basics -lbasic
-LIBX11		=	-L/usr/X11/lib -lXext -lX11
-LIBMLX		=	-L./src/minilibx -lmlx
-LIBGRAPHIC	=	$(LIBX11) $(LIBBASIC) $(LIBMLX) -lncurses
+LIBNCURSES	=	-L./src/curse -lcurse
+LIBGRAPHIC	=	-lncurses
 
-LIBFLAG		=	$(LIBESSENTIAL) $(LIBGRAPHIC) $(LIBRPG)
+LIBFLAG		=	$(LIBESSENTIAL) $(LIBNCURSES) $(LIBGRAPHIC) $(LIBRPG)
 
-.PHONY: all clean fclean re ultragcc
+.PHONY: all clean fclean re $(NAME)
 
 all: $(NAME)
 
-makelib: minilibx libft printf libbasic librpg
+makelib: libft printf libcurse librpg
 
 $(NAME): makelib $(OBJ)
 	@$(CC) $(CCFLAGS) $(HEADFLAG) $(LIBFLAG) -o $(NAME) $(OBJ)
@@ -49,14 +47,11 @@ $(NAME): makelib $(OBJ)
 libft: ./inc/libft.h
 	@make -C ./src/libft
 
-libbasic: ./inc/basics.h
-	@make -C ./src/basics
+libcurse: ./inc/curse.h
+	@make -C ./src/curse
 
 printf: ./inc/ft_printf.h
 	@make -C ./src/ft_printf
-
-minilibx: ./inc/mlx.h
-	@make -C ./src/minilibx
 
 librpg: ./inc/RPG.h
 	@make -C ./src/RPG
@@ -66,18 +61,15 @@ librpg: ./inc/RPG.h
 
 clean:
 	@make -C ./src/libft clean
-	@make -C ./src/basics clean
+	@make -C ./src/curse clean
 	@make -C ./src/ft_printf clean
-	@make -C ./src/minilibx clean
 	@make -C ./src/RPG clean
 	@rm -f $(OBJ)
 	@echo "\033[31m•\033[0m $(NAME) clean.\033[0m"
 
 fclean:
-	@(cd ./src/minilibx; rm -rf $(XOBJ))
-	@(cd ./src/minilibx; rm -rf $(XLIB))
 	@make -C ./src/libft fclean
-	@make -C ./src/basics fclean
+	@make -C ./src/curse fclean
 	@make -C ./src/ft_printf fclean
 	@make -C ./src/RPG fclean
 	@rm -f $(OBJ)

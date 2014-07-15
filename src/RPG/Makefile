@@ -18,8 +18,10 @@ SRC			=	character.c
 
 OBJ			= $(subst .c,.o,$(SRC))
 
-CC			= gcc
-CCFLAGS		= -Werror -Wall -Wextra -Wuninitialized -O3 -g3
+CC		= gcc
+CCFLAGS	= -Werror -Wall -Wextra -Wuninitialized -O3 -g3
+
+LIBFLAGS = -lncurses
 
 all: $(NAME)
 
@@ -29,7 +31,7 @@ $(NAME):	$(OBJ)
 			@echo "\033[32m•\033[0m RPG compil: \033[32m$(NAME)\033[0m"
 
 %.o:		%.c
-			@$(CC) $(CCFLAGS) -I $(HEADDIR) -o $@ -c $<
+			@$(CC) $(CCFLAGS) -I $(HEADDIR) $(LIBFLAGS) -o $@ -c $<
 
 clean:
 			@rm -f $(OBJ)

@@ -10,15 +10,13 @@
 #                                                                              #
 #******************************************************************************#
 
-NAME		=	libbasic.a
-LIB			=	basic
-HEADDIR		=	../../inc
+NAME		=	libcurse.a
+LIB			=	ft
+HEADDIR		=	 ../../inc
 
-SRC			=	basics.c \
-				draw.c \
-				manage.c \
-				point.c \
-				pointlist.c
+SRC			=	curse.c \
+					manage_win.c \
+					manage_win_list.c
 
 OBJ			= $(subst .c,.o,$(SRC))
 
@@ -30,18 +28,18 @@ all: $(NAME)
 $(NAME):	$(OBJ)
 			@ar rc $@ $^
 			@ranlib $@
-			@echo "\033[32m•\033[0m Basics compil: \033[32m$(NAME)\033[0m"
+			@echo "\033[32m•\033[0m Curse compil: \033[32m$(NAME)\033[0m"
 
 %.o:		%.c
 			@$(CC) $(CCFLAGS) -I $(HEADDIR) -o $@ -c $<
 
 clean:
 			@rm -f $(OBJ)
-			@echo "\033[31m•\033[0m basics clean.\033[0m"
+			@echo "\033[31m•\033[0m curse clean.\033[0m"
 
 fclean:		clean
 			@rm -f $(NAME)
-			@echo "\033[31m•\033[0m basics fclean: \033[31m$(NAME)\033[0m"
+			@echo "\033[31m•\033[0m curse fclean: \033[31m$(NAME)\033[0m"
 
 re:			all
 

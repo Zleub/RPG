@@ -31,10 +31,8 @@ void				new_char(STRING str)
 	save_heros(main_char);
 }
 
-#include <ncurses.h>
+#include <curse.h>
 
-#define WORLD_WIDTH 50
-#define WORLD_HEIGHT 20
 int					main(void)
 {
 	// STRING			str;
@@ -49,25 +47,31 @@ int					main(void)
 	// 	new_char(str);
 	// return (0);
 
-	WINDOW		*mainwin;
-    if ((mainwin = initscr()) == NULL)
-	{
-		fprintf(stderr, "Error initialising ncurses.\n");
-		exit(EXIT_FAILURE);
-    }
+	// WINDOW		*mainwin;
+	//
+	// if ((mainwin = initscr()) == NULL)
+	// {
+	// 	fprintf(stderr, "Error initialising ncurses.\n");
+	// 	exit(EXIT_FAILURE);
+  // }
+
+	manage_ncurses(SET);
+
 	int x = 0;
+
 	while (x < 13)
 	{
 		clear();
     	mvprintw(x, 33, "Hello, world: %d", x);
-    	refresh();
+		// int wborder(mainwin, '*', '*', '*', '*', 0, 0, 10, 10);
+		refresh();
 		x += 1;
-		usleep(100 * 8000);
+		usleep(100 * 1000);
 	}
-    sleep(3);
-    delwin(mainwin);
-    endwin();
-    refresh();
 
-    return (0);
+	sleep(1);
+  endwin();
+  delwin(manage_ncurses(GET));
+  refresh();
+  return (0);
 }
