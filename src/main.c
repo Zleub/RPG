@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:52:25 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/15 20:12:06 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/16 06:23:33 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,15 @@ int					main(void)
 	// 	new_char(str);
 	// return (0);
 
-	WINDOW		*mainwin;
-
-	if ((mainwin = initscr()) == NULL)
-	{
-		fprintf(stderr, "Error initialising ncurses.\n");
-		exit(EXIT_FAILURE);
-	}
 
 	manage_ncurses(SET);
+	manage_win(NEW, create_wintab(LINES, COLS / 4, 0, COLS - COLS / 4));
 
-	manage_win(NEW, create_wintab(10, 10, 0, 0));
+	manage_win_list(PRINT, NULL);
+	// refresh();
 
-
-	sleep(1);
+	sleep(2);
 	endwin();
 	delwin(manage_ncurses(GET));
-	refresh();
 	return (0);
 }

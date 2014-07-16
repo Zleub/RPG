@@ -14,8 +14,9 @@ NAME		=	libcurse.a
 LIB			=	ft
 HEADDIR		=	 ../../inc
 
-SRC			=	curse.c \
-				wintab.c \
+SRC			=	manage_curse.c \
+				manage_wintab.c \
+				manage_wintab_list.c \
 				manage_win.c \
 				manage_win_list.c
 

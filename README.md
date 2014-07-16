@@ -1,5 +1,6 @@
 #Citadel
 
+I need a asprintf
 
 ##Preview
 
@@ -27,6 +28,7 @@ shortcuts:
 reference:
     managegame :    GET
                     SET
+
     managechar :    GET
                     SET
 
