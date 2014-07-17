@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:55:47 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/16 06:20:33 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 04:41:57 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,18 @@ void		print_win_fd(WINDOW *ptr, int fd)
 	write(fd, content, ft_strlen(content));
 }
 
+void		refresh_win(WINDOW *win)
+{
+	wrefresh(win);
+}
+
+void		destroy_win(WINDOW *win)
+{
+	wborder(win, ' ', ' ', ' ',' ',' ',' ',' ',' ');
+	wrefresh(win);
+	delwin(win);
+}
+
 WINDOW		*manage_win(int macro, WINTAB array)
 {
 	static WINDOW	*ptr;
@@ -45,9 +57,16 @@ WINDOW		*manage_win(int macro, WINTAB array)
 	// else if (macro == SET)
 	// 	ptr = object;
 	else if (macro == NEW)
+	{
 		ptr = create_win(array);
+		return (ptr);
+	}
 	else if (macro == PRINT)
 		print_win(ptr);
+	else if (macro == FRESH)
+		refresh_win(ptr);
+	else if (macro == DELETE)
+		destroy_win(ptr);
 	else
 		ft_printf("Useless call to manage_win\n");
 	return (NULL);

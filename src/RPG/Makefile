@@ -14,7 +14,8 @@ NAME		=	libRPG.a
 LIB			=	ft
 HEADDIR		=	 ../../inc
 
-SRC			=	character.c
+SRC			=	character.c \
+				signal.c
 
 OBJ			= $(subst .c,.o,$(SRC))
 

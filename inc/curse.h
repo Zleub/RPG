@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/16 06:07:34 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 04:42:16 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 enum	e_manage
 {
-	GET, SET, NEW, ADD, PRINT
+	GET, SET, NEW, ADD, PRINT, FRESH, DELETE
 };
 
 typedef struct				s_win_list
@@ -46,5 +46,7 @@ void						print_win(WINDOW *ptr);
 void						print_win_fd(WINDOW *ptr, int fd);
 WINDOW						*manage_win(int macro, WINTAB array);
 WINTAB						create_wintab(int i, int j, int x, int y);
+void						refresh_win(WINDOW *win);
+void						destroy_win(WINDOW *win);
 
 #endif

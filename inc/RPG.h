@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/16 04:10:09 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 04:20:36 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <libft.h>
 #include <fcntl.h>
 #include <stdio.h>
+
+# include <signal.h>
 
 #define STRING char*
 
@@ -30,14 +32,31 @@ typedef struct		s_heros
 	int				life;
 }					t_heros;
 
-enum s_content
+typedef struct	s_gameplay
 {
-    NAME, LOCATION, LEVEL, EXPERIENCE, STRENGH, ARMOR, LIFE
+	int			status;
+}				t_gameplay;
+
+enum				e_content
+{
+	NAME, LOCATION, LEVEL, EXPERIENCE, STRENGH, ARMOR, LIFE
 };
 
-t_heros			 *create_heros(void);
+enum				e_gameplay
+{
+	MENU, GAME
+};
+
+typedef enum	e_signal
+{
+	SIG_WINCH, SIG_TSTP, SIG_CONT, SIG_INT
+}				t_signal;
+
+t_heros				*create_heros(void);
 void				print_heros(t_heros *character);
-void                save_heros(t_heros *character);
-t_heros            *load_heros(STRING name);
+void				save_heros(t_heros *character);
+t_heros				*load_heros(STRING name);
+
+void	ft_signal(void);
 
 #endif

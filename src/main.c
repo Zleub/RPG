@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:52:25 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/16 06:23:33 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 04:37:06 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,22 @@ int					main(void)
 	// 	new_char(str);
 	// return (0);
 
+	ft_signal();
+
+
+	WINDOW *main_win;
+	WINDOW *menu_win;
 
 	manage_ncurses(SET);
-	manage_win(NEW, create_wintab(LINES, COLS / 4, 0, COLS - COLS / 4));
-
+	main_win = manage_win(NEW, create_wintab(LINES, COLS / 4, 0, COLS - COLS / 4));
+	menu_win = manage_win(NEW, create_wintab(LINES, COLS - COLS / 4, 0, 0));
 	manage_win_list(PRINT, NULL);
 	// refresh();
 
-	sleep(2);
+	while (42)
+	{
+		usleep(100);
+	}
 	endwin();
 	delwin(manage_ncurses(GET));
 	return (0);
