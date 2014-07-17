@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:55:33 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 09:36:22 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 11:44:30 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,15 @@ void		print_win_list(t_win_list *head)
 
 t_win_list		*destroy_win_list(t_win_list *head)
 {
-	destroy_win(head->win);
-	head->win = NULL;
-	if (head->next)
-		destroy_win_list(head->next);
-	free(head);
-	head = NULL;
+	if (head)
+	{
+		destroy_win(head->win);
+		head->win = NULL;
+		if (head->next)
+			destroy_win_list(head->next);
+		free(head);
+		head = NULL;
+	}
 	return (NULL);
 }
 

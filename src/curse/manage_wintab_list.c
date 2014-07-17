@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:44:53 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 09:41:54 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 11:46:00 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,15 @@ void		print_wintab_list(WINTABLIST *head)
 
 WINTABLIST		*destroy_wintab_list(WINTABLIST *head)
 {
-	destroy_wintab(head->array);
-	if (head->next)
-		destroy_wintab_list(head->next);
-	free(head);
-	head = NULL;
+	if (head)
+	{
+		destroy_wintab(head->array);
+		if (head->next)
+			destroy_wintab_list(head->next);
+		free(head);
+		head = NULL;
+		return (NULL);
+	}
 	return (NULL);
 }
 

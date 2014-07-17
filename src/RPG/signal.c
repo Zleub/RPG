@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/17 04:08:29 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 11:27:44 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 11:51:27 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void			resize(int sig)
 
 	(void)sig;
 
-	endwin();
+	// endwin();
 	manage_win_list(DELETE, NULL);
 	manage_wintab_list(DELETE, NULL);
 

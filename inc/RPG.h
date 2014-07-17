@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 11:21:18 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 11:38:09 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 
 #include <libft.h>
 #include <fcntl.h>
+#include <signal.h>
+#include <curse.h>
+
 #include <stdio.h>
 
-# include <signal.h>
 
 #define STRING char*
 
