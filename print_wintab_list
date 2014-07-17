@@ -1,2 +1,4 @@
 print_wintab_fd:
-array: 0x7faa09600b30
+array: 0x7ffcc3500560
+print_wintab_fd:
+array: 0x7ffcc3504280

@@ -53,25 +53,32 @@ t_gameplay		*manage_game(int macro)
 		int fd;
 		// char *str;
 
+			char	str[80];
+			WINDOW	*win;
 		fd = open("debug", O_CREAT | O_TRUNC | O_WRONLY, 0755);
 		if (game->status == MENU)
 		{
-			char	str[80];
-			WINDOW	*win;
 
 			win = manage_win(NEW, create_wintab(LINES, COLS, 0, 0));
 			mvwprintw(win, lines_center() - 1, cols_center("Hi. What's your name ?"), "Hi. What's your name ?");
 			wmove(win, lines_center(), cols_center("12345"));
-			wscanw(win, "%s", &str);
+			int validate = 0;
+			while (validate == 0)
+			{
+				wscanw(win, "%s", &str);
+				if (ft_isalpha(str[0]))
+					validate = 1;
+			}
 			game->status = RUN;
-			destroy_win(win);
-			resize(0);
+			manage_game(PRINT);
 		}
 		else if (game->status == RUN)
 		{
 			write(fd, "test\n", 5);
 			manage_win(NEW_B, create_wintab(LINES, COLS / 4, 0, COLS - COLS / 4));
-			manage_win(NEW_B, create_wintab(LINES, COLS - COLS / 4, 0, 0));
+			win = manage_win(NEW_B, create_wintab(LINES, COLS - COLS / 4, 0, 0));
+			wmove(win, lines_center(), cols_center("12345"));
+			wscanw(win, "%s", &str);
 		}
 		else
 		{
