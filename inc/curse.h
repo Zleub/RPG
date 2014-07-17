@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 11:22:33 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 12:40:57 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 enum	e_manage
 {
-	GET, SET, NEW, ADD, PRINT, FRESH, DELETE
+	GET, SET, NEW, ADD, PRINT, FRESH, DELETE, NEW_B
 };
 
 typedef struct				s_win_list
@@ -32,6 +32,14 @@ typedef struct				s_win_list
 }							t_win_list;
 
 # define WINTAB int
+
+/*
+**	WINTAB is a basic param for WINDOW creation as
+**	WINTAB[0] = height
+**	WINTAB[1] = width
+**	WINTAB[2] = x
+**	WINTAB[3] = y
+*/
 
 typedef struct				s_wintab_list
 {
@@ -46,6 +54,7 @@ WINDOW						*manage_ncurses(int macro);
 t_win_list					*manage_win_list(int macro, WINDOW *object);
 
 WINDOW						*manage_win(int macro, WINTAB *array);
+WINDOW						*create_win(WINTAB *array);
 void						print_win(WINDOW *ptr);
 void						print_win_fd(WINDOW *ptr, int fd);
 void						refresh_win(WINDOW *win);

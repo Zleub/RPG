@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 11:38:09 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 12:26:47 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ enum				e_content
 
 enum				e_gameplay
 {
-	MENU, GAME
+	MENU, RUN
 };
 
 enum				e_signal

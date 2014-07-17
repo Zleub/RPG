@@ -6,13 +6,23 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:55:47 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 09:31:54 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 12:41:18 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <curse.h>
 
 WINDOW		*create_win(WINTAB *array)
+{
+	WINDOW	*new;
+
+	new = newwin(array[0], array[1], array[2], array[3]);
+	manage_win_list(ADD, new);
+	wrefresh(new);
+	return (new);
+}
+
+WINDOW		*create_boxed_win(WINTAB *array)
 {
 	WINDOW	*new;
 
@@ -58,6 +68,11 @@ WINDOW		*manage_win(int macro, WINTAB *array)
 		return (ptr);
 	// else if (macro == SET)
 	// 	ptr = object;
+	else if (macro == NEW_B)
+	{
+		ptr = create_boxed_win(array);
+		return (ptr);
+	}
 	else if (macro == NEW)
 	{
 		ptr = create_win(array);

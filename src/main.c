@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:52:25 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 11:37:16 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 12:40:13 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int					main(void)
 	// return (0);
 
 	manage_game(NEW);
+	manage_game(PRINT);
 
 	while (42)
 	{
