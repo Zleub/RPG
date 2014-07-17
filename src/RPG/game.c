@@ -1,8 +1,8 @@
 #include <RPG.h>
-
+#include <string.h>
 int			cols_center(char *str)
 {
-	return (COLS / 2 - ft_strlen(str) / 2);
+	return ((COLS - ft_strlen(str)) / 2);
 }
 
 int			lines_center()
@@ -50,16 +50,26 @@ t_gameplay		*manage_game(int macro)
 	}
 	else if (macro == PRINT)
 	{
+		int fd;
+		// char *str;
+
+		fd = open("debug", O_CREAT | O_TRUNC | O_WRONLY, 0755);
 		if (game->status == MENU)
 		{
+			char	str[80];
 			WINDOW	*win;
 
 			win = manage_win(NEW, create_wintab(LINES, COLS, 0, 0));
 			mvwprintw(win, lines_center() - 1, cols_center("Hi. What's your name ?"), "Hi. What's your name ?");
-			refresh_win(win);
+			wmove(win, lines_center(), cols_center("12345"));
+			wscanw(win, "%s", &str);
+			game->status = RUN;
+			destroy_win(win);
+			resize(0);
 		}
 		else if (game->status == RUN)
 		{
+			write(fd, "test\n", 5);
 			manage_win(NEW_B, create_wintab(LINES, COLS / 4, 0, COLS - COLS / 4));
 			manage_win(NEW_B, create_wintab(LINES, COLS - COLS / 4, 0, 0));
 		}
@@ -67,6 +77,7 @@ t_gameplay		*manage_game(int macro)
 		{
 			;
 		}
+		close(fd);
 	}
 	else
 		ft_printf("Useless call to manage_win_list\n");

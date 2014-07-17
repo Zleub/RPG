@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:52:25 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 12:40:13 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 18:18:47 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,11 @@ int					main(void)
 	// return (0);
 
 	manage_game(NEW);
+
+	// while (manage_game(GET)->status != -1)
 	manage_game(PRINT);
 
-	while (42)
-	{
-		usleep(100);
-	}
+	// getch();
 
 	endwin();
 	delwin(manage_ncurses(GET));

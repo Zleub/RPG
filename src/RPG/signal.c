@@ -6,14 +6,14 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/17 04:08:29 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 12:17:09 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 18:20:30 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <RPG.h>
 #include <curse.h>
 
-static void			resize(int sig)
+void			resize(int sig)
 {
 	struct winsize w;
 

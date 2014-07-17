@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:55:19 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 11:27:30 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 16:34:13 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ WINDOW	*manage_ncurses(int macro)
 			close(fd);
 			exit(0);
 		}
-		cbreak();
-		noecho();
+		// cbreak(); CHARACTER AT A TIME
+		// noecho(); NO CURSOR
 		curs_set(0);
 	}
 	else

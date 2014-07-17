@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 12:26:47 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 18:20:22 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,5 @@ t_heros				*load_heros(STRING name);
 t_gameplay			*manage_game(int macro);
 
 void	ft_signal(void);
-
+void			resize(int sig);
 #endif
