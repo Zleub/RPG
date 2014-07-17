@@ -6,11 +6,12 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:52:25 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 04:37:06 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 11:18:43 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <RPG.h>
+#include <curse.h>
 
 int					ft_hash(char *line)
 {
@@ -43,8 +44,6 @@ void				new_char(STRING str)
 	save_heros(main_char);
 }
 
-#include <curse.h>
-
 int					main(void)
 {
 	// STRING			str;
@@ -59,16 +58,14 @@ int					main(void)
 	// 	new_char(str);
 	// return (0);
 
-	ft_signal();
+	// WINDOW *main_win;
+	// WINDOW *menu_win;
 
-
-	WINDOW *main_win;
-	WINDOW *menu_win;
-
-	manage_ncurses(SET);
-	main_win = manage_win(NEW, create_wintab(LINES, COLS / 4, 0, COLS - COLS / 4));
-	menu_win = manage_win(NEW, create_wintab(LINES, COLS - COLS / 4, 0, 0));
+	// main_win = manage_win(NEW, create_wintab(LINES, COLS / 4, 0, COLS - COLS / 4));
+	// menu_win = manage_win(NEW, create_wintab(LINES, COLS - COLS / 4, 0, 0));
+	manage_game(NEW);
 	manage_win_list(PRINT, NULL);
+	manage_wintab_list(PRINT, NULL);
 	// refresh();
 
 	while (42)

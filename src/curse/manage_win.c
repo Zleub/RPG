@@ -6,13 +6,13 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:55:47 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 04:41:57 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 09:31:54 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <curse.h>
 
-WINDOW		*create_win(WINTAB array)
+WINDOW		*create_win(WINTAB *array)
 {
 	WINDOW	*new;
 
@@ -32,8 +32,10 @@ void		print_win(WINDOW *ptr)
 void		print_win_fd(WINDOW *ptr, int fd)
 {
 	char	*content;
-	asprintf(&content, "print_win_fd:\n%p\n", ptr);
+
+	asprintf(&content, "print_win_fd:\nwin: %p\n", ptr);
 	write(fd, content, ft_strlen(content));
+	free (content);
 }
 
 void		refresh_win(WINDOW *win)
@@ -48,7 +50,7 @@ void		destroy_win(WINDOW *win)
 	delwin(win);
 }
 
-WINDOW		*manage_win(int macro, WINTAB array)
+WINDOW		*manage_win(int macro, WINTAB *array)
 {
 	static WINDOW	*ptr;
 

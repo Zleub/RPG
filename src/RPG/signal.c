@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/17 04:08:29 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 05:32:04 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 11:27:44 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 
 static void			resize(int sig)
 {
+	struct winsize w;
+
 	(void)sig;
-	resizeterm(20, 20);
 
-	t_win_list		*head;
+	endwin();
+	manage_win_list(DELETE, NULL);
+	manage_wintab_list(DELETE, NULL);
 
-	head = manage_win_list(GET, NULL);
-	while (head)
-	{
-		// destroy_win(head->win);
-		mvwprintw(head->win, 1, 1, "%d \\ %d\n", LINES, COLS);
-		refresh_win(head->win);
-		head = head->next;
-	}
-	// manage_ncurses(SET);
-	// manage_win(NEW, create_wintab(LINES, COLS / 4, 0, COLS - COLS / 4));
-	// manage_win(NEW, create_wintab(LINES, COLS - COLS / 4, 0, 0));
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+	resizeterm(w.ws_row, w.ws_col);
+
+	manage_game(NEW);
+
+	manage_win_list(PRINT, NULL);
+	manage_wintab_list(PRINT, NULL);
+
 }
 
 void				ft_signal(void)

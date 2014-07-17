@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:55:33 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/16 06:26:51 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 09:36:22 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,9 @@ t_win_list		*add_win_list(t_win_list *head, WINDOW *object)
 void		print_win_list(t_win_list *head)
 {
 	int		fd;
-	char	*str;
 	t_win_list	*tmp;
 
-	asprintf(&str, "print_win_list: %p", head);
-	if (!(fd = open(str, O_CREAT | O_TRUNC | O_WRONLY, 0755)))
+	if (!(fd = open("print_win_list", O_CREAT | O_TRUNC | O_WRONLY, 0755)))
 		return ;
 	tmp = head;
 	while (tmp)
@@ -59,6 +57,17 @@ void		print_win_list(t_win_list *head)
 		tmp = tmp->next;
 	}
 	close(fd);
+}
+
+t_win_list		*destroy_win_list(t_win_list *head)
+{
+	destroy_win(head->win);
+	head->win = NULL;
+	if (head->next)
+		destroy_win_list(head->next);
+	free(head);
+	head = NULL;
+	return (NULL);
 }
 
 t_win_list		*manage_win_list(int macro, WINDOW *object)
@@ -73,6 +82,8 @@ t_win_list		*manage_win_list(int macro, WINDOW *object)
 		head = add_win_list(head, object);
 	else if (macro == PRINT)
 		print_win_list(head);
+	else if (macro == DELETE)
+		head = destroy_win_list(head);
 	else
 		ft_printf("Useless call to manage_win_list\n");
 	return (NULL);

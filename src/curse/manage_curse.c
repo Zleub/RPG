@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:55:19 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 05:38:31 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/17 11:27:30 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ WINDOW	*manage_ncurses(int macro)
 
 	if (macro == GET)
 		return (main_win);
-	else if (macro == SET)
+	else if (macro == NEW)
 	{
 		if (!(main_win = initscr()))
 		{
@@ -30,10 +30,7 @@ WINDOW	*manage_ncurses(int macro)
 		}
 		cbreak();
 		noecho();
-	}
-	else if (macro == NEW)
-	{
-		;
+		curs_set(0);
 	}
 	else
 		ft_printf("Useless call to manage_ncurses\n");
