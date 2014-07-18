@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:52:25 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 18:18:47 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/18 18:51:06 by Arno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ int					main(void)
 	// return (0);
 
 	manage_game(NEW);
-
-	// while (manage_game(GET)->status != -1)
 	manage_game(PRINT);
 
 	// getch();

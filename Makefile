@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adebray <adebray@student.42.fr>            +#+  +:+       +#+         #
+#    By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/16 14:40:42 by adebray           #+#    #+#              #
-#    Updated: 2014/07/09 04:42:18 by adebray          ###   ########.fr        #
+#    Updated: 2014/07/16 11:29:54 by Arno             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME		=	RPG
@@ -18,7 +18,7 @@ OBJ			=	$(subst .c,.o,$(SRC))
 XOBJ		=	$(shell ls ./src/minilibx | grep '\.o')
 XLIB		=	$(shell ls ./src/minilibx | grep '\.a')
 
-CC			=	clang
+CC			=	gcc
 CCFLAGS		=	-Werror -Wall -Wextra -Wuninitialized -g3 -O3
 
 HEADFLAG	=	-I ./$(HEADDIR)
