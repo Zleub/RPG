@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 18:20:22 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/19 05:49:56 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ typedef struct		s_heros
 	int				armor;
 	int				life;
 }					t_heros;
+
+typedef struct			s_heros_list
+{
+	t_heros				*heros;
+	struct s_heros_list	*next;
+}						t_heros_list;
 
 typedef struct	s_gameplay
 {
@@ -63,4 +69,7 @@ t_gameplay			*manage_game(int macro);
 
 void	ft_signal(void);
 void			resize(int sig);
+
+t_heros_list	*manage_heros_list(int macro, t_heros *heros);
+
 #endif

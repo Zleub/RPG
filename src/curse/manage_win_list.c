@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:55:33 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 11:44:30 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/19 05:54:12 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ t_win_list		*manage_win_list(int macro, WINDOW *object)
 	else if (macro == DELETE)
 		head = destroy_win_list(head);
 	else
-		ft_printf("Useless call to manage_win_list\n");
+		ft_printf("%d: Useless call to manage_win_list\n", macro);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:44:53 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 11:46:00 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/19 02:33:45 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ WINTABLIST		*manage_wintab_list(int macro, WINTAB *array)
 
 	if (macro == GET)
 		return (head);
-	else if (macro == SET)
-	{
-		if (!head)
-			head->array = array;
-		else
-			ft_printf("Head already set\n");
-	}
+	// else if (macro == SET)
+	// {
+	// 	if (head && !head->array)
+	// 		head->array = array;
+	// 	else
+	// 		ft_printf("Head already set\n");
+	// }
 	else if (macro == ADD)
 		head = add_wintab_list(head, array);
 	else if (macro == PRINT)

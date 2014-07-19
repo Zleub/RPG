@@ -15,7 +15,8 @@ LIB			=	ft
 HEADDIR		=	 ../../inc
 
 SRC			=	game.c \
-				character.c \
+				manage_char.c \
+				manage_char_list.c \
 				signal.c
 
 OBJ			= $(subst .c,.o,$(SRC))

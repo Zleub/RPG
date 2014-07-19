@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   character.c                                        :+:      :+:    :+:   */
+/*   manage_char.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 11:55:49 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 12:37:24 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/19 02:45:43 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void				print_heros(t_heros *character)
 
 // void				wprint_heros()
 
-void                save_heros(t_heros *character)
+void				save_heros(t_heros *character)
 {
-	int             fd;
+	int				fd;
 
 	fd = open(character->name, O_CREAT | O_TRUNC | O_WRONLY);
 	ft_putstr_fd(character->name, fd);
@@ -64,12 +64,12 @@ void                save_heros(t_heros *character)
 	close(fd);
 }
 
-t_heros            *load_heros(STRING name)
+t_heros				*load_heros(STRING name)
 {
-	t_heros        *new;
-	int            fd;
-	int            i;
-	STRING         line;
+	t_heros			*new;
+	int				fd;
+	int				i;
+	STRING			line;
 
 	if ((fd = open(name, O_RDONLY)) == -1)
 	{
@@ -102,4 +102,19 @@ t_heros            *load_heros(STRING name)
 		close (fd);
 	}
 	return (new);
+}
+
+t_heros		*manage_char(int macro, STRING name)
+{
+	static t_heros		*heros;
+
+	if (macro == GET)
+		return (heros);
+	// else if (macro == SET)
+	// 	heros = new_heros;
+	else if (macro == LOAD)
+		load_heros(name);
+	else
+		ft_printf("useless call to manage_char\n");
+	return (NULL);
 }
