@@ -81,7 +81,7 @@ t_heros				*new_char(STRING str)
 	new = create_heros();
 	hash = ft_hash(str);
 	new->name = str;
-	new->location = "Taverne";
+	new->location = "Citadel";
 	new->experience = 0;
 	new->level = 0;
 	new->armor = 0;
@@ -141,6 +141,23 @@ void			game_menu(t_gameplay *game)
 	manage_game(PRINT);
 }
 
+t_heros			*tick_heros(t_heros *heros)
+{
+	int fd = open("debuf", O_CREAT | O_TRUNC | O_WRONLY, 0755);
+	write(fd, "test n8\n", 8);
+	close(fd);
+	if (heros)
+	{
+		if (heros->experience == heros->level * 10)
+		{
+			heros->experience = 0;
+			heros->level += 1;
+		}
+		heros->experience += 1;
+	}
+	return (heros);
+}
+
 void			game_run()
 {
 	int				key;
@@ -161,11 +178,12 @@ void			game_run()
 		head = manage_heros_list(GET, NULL);
 		while (head)
 		{
-			mvwprintw(win, 5, 5, "%d %s, lvl: %d at %s", i, head->heros->name, head->heros->level, head->heros->location);
+			head->heros = tick_heros(head->heros); // PLAY EVERY HEROS
+			mvwprintw(win, 5, 5, "%5d %10s, lvl: %-5d at %-10s", i, head->heros->name, head->heros->level, head->heros->location); // PRINT EVERY HEROS
 			head = head->next;
 		}
 		key = wgetch(win);
-		manage_win_list(DELETE, NULL);
+		manage_win_list(DELETE, NULL); // REFRESH MAIN SCREEN
 		manage_win(NEW_B, create_wintab(LINES, COLS / 4, 0, COLS - COLS / 4));
 		win = manage_win(NEW_B, create_wintab(LINES, COLS - COLS / 4, 0, 0));
 	}
