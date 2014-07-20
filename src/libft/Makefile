@@ -37,7 +37,7 @@ SRC			=	ft_memset.c				ft_bzero.c			ft_memcpy.c		\
 OBJ			= $(subst .c,.o,$(SRC))
 
 CC			= gcc
-CCFLAGS		= -Werror -Wall -Wextra -Wuninitialized -O3 -g3
+CCFLAGS		= -Werror -Wall -Wextra -Wuninitialized -O0 -g
 
 all: $(NAME)
 

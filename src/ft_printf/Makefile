@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adebray <adebray@student.42.fr>            +#+  +:+       +#+         #
+#    By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/23 04:54:36 by adebray           #+#    #+#              #
-#    Updated: 2014/03/15 16:29:57 by adebray          ###   ########.fr        #
+#    Updated: 2014/07/20 12:39:49 by Arno             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC = ./ft_atoi.c \
 OBJ = $(subst .c,.o,$(SRC))
 
 CC = gcc
-CCFLAGS = -Werror -Wall -Wextra -Wuninitialized -g3 -O3
+CCFLAGS = -Werror -Wall -Wextra -Wuninitialized -O0 -g
 HEADFLAG = -I $(HEADDIR)
 
 .PHONY: all clean fclean re

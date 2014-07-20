@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_win_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:55:33 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/19 05:54:12 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/20 10:40:22 by Arno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ t_win_list		*destroy_win_list(t_win_list *head)
 	{
 		destroy_win(head->win);
 		head->win = NULL;
-		if (head->next)
-			destroy_win_list(head->next);
+		destroy_win_list(head->next);
 		free(head);
 		head = NULL;
 	}

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/07/20 10:03:57 by Arno              #+#    #+#             */
+/*   Updated: 2014/07/20 22:43:19 by Arno             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <RPG.h>
 #include <string.h>
 
@@ -161,7 +173,7 @@ void		tick_heros(WINDOW *menu, t_heros *heros) // GAME MECHANISM EXAMPLE ??
 	}
 	if (heros->level >= 5)
 	{
-			if (!tmp || tmp < 100)
+			if (!tmp || tmp < 10)
 				tmp = (int)time(NULL);
 			else if ((tmp % 100) == 0)
 			{
@@ -191,7 +203,7 @@ void			game_run()
 	// halfdelay(8);
 	// key = -1;
 	int fd = open("debug", O_CREAT | O_TRUNC | O_WRONLY, 0755);
-
+	i = 0;
 	while (42)
 	{
 		write(fd, "test\n", 5);
@@ -212,7 +224,6 @@ void			game_run()
 		}
 		wrefresh(win);
 		usleep(100 * 8000);
-
 		// key = wgetch(win);
 		// DO KEY
 		// key = -1;

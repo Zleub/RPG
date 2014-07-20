@@ -22,7 +22,7 @@ SRC			=	game.c \
 OBJ			= $(subst .c,.o,$(SRC))
 
 CC		= gcc
-CCFLAGS	= -Werror -Wall -Wextra -Wuninitialized -O3 -g3
+CCFLAGS	= -Werror -Wall -Wextra -Wuninitialized -O0 -g
 
 # LIBFLAGS = -lncurses
 

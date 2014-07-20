@@ -6,7 +6,7 @@
 #    By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/16 14:40:42 by adebray           #+#    #+#              #
-#    Updated: 2014/07/16 11:29:54 by Arno             ###   ########.fr        #
+#    Updated: 2014/07/20 12:40:15 by Arno             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME		=	RPG
@@ -19,7 +19,7 @@ XOBJ		=	$(shell ls ./src/minilibx | grep '\.o')
 XLIB		=	$(shell ls ./src/minilibx | grep '\.a')
 
 CC			=	gcc
-CCFLAGS		=	-Werror -Wall -Wextra -Wuninitialized -g3 -O3
+CCFLAGS		=	-Werror -Wall -Wextra -Wuninitialized -O0 -g
 
 HEADFLAG	=	-I ./$(HEADDIR)
 
