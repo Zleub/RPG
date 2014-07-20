@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 11:55:49 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/19 02:45:43 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/20 02:06:43 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_heros				*create_heros(void)
 	new->strengh = -1;
 	new->armor = -1;
 	new->life = -1;
+	new->id = -1;
 	return (new);
 }
 

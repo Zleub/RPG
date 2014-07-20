@@ -1,6 +1,20 @@
 #Citadel
 
-I need a asprintf
+##Todo
+
+```
+tool:
+	asprintf
+game:
+	threading printing
+	resize
+characters:
+	jobs
+	stats
+	battle
+	groups
+
+```
 
 ##Preview
 
@@ -8,7 +22,7 @@ I need a asprintf
 Hi. What's your name ?
 Bruenor
 
-Welcome Bruenor, here's your guild:
+/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
 
 ID        NAME        ACTIVITY
 
@@ -21,37 +35,26 @@ ID        NAME        ACTIVITY
 
 ```
 shortcuts:
-    ctrl + up/down : print character list one more/less from top
-    ctrl + l : logs
+	ctrl + up/down : print character list one more/less from top
+	ctrl + l : logs
 ```
 ```
 reference:
-    managegame :    GET
-                    SET
+	managegame :    GET
+					SET
 
-    managechar :    GET
-                    SET
+	managechar :    GET
+					SET
 
-    managecharlist: GET
-                    ADD
-                    LOAD
-                    PRINT
+	managecharlist: GET
+					ADD
+					LOAD
+					PRINT
 ```
 ##Save File Example
 
 ```
-
-```
-##Debug preview
-
-```
-
-
-<-06-><----12----><------16------>
-ID        NAME        ACTIVITY
-
-01    Bruenor     Managing
-02    Paleo       Hunting
-03    Giujy       Cooking
-
+{
+	"JSON": "format"
+}
 ```

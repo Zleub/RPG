@@ -77,6 +77,7 @@ t_heros				*new_char(STRING str)
 {
 	t_heros			*new;
 	int				hash;
+	static int		cmp;
 
 	new = create_heros();
 	hash = ft_hash(str);
@@ -87,7 +88,9 @@ t_heros				*new_char(STRING str)
 	new->armor = 0;
 	new->strengh = hash % 21;
 	new->life = 20;
+	new->id = cmp;
 	manage_heros_list(ADD, new);
+	cmp += 1;
 	return (new);
 }
 
@@ -98,9 +101,9 @@ void			get_name(WINDOW *win)
 	t_heros	*heros;
 
 	validate = 0;
-	ft_bzero(str, 80);
 	while (validate == 0)
 	{
+		ft_bzero(str, 80);
 		wscanw(win, "%s", &str);
 		if (is_valide_name(str))
 		{
@@ -124,7 +127,6 @@ void			get_name(WINDOW *win)
 		{
 			mvwprintw(win, lines_center(), cols_center("12345"), "%80c", ' ');
 			wmove(win, lines_center(), cols_center("12345"));
-			ft_bzero(str, 80);
 		}
 	}
 }
@@ -141,21 +143,34 @@ void			game_menu(t_gameplay *game)
 	manage_game(PRINT);
 }
 
-t_heros			*tick_heros(t_heros *heros)
+#include <time.h>
+
+void		tick_heros(t_heros *heros) // GAME MECHANISM EXAMPLE ??
 {
-	int fd = open("debuf", O_CREAT | O_TRUNC | O_WRONLY, 0755);
-	write(fd, "test n8\n", 8);
-	close(fd);
-	if (heros)
+	static int tmp;
+	static int vendredi;
+
+	if (heros->experience == heros->level * 10)
 	{
-		if (heros->experience == heros->level * 10)
-		{
-			heros->experience = 0;
-			heros->level += 1;
-		}
-		heros->experience += 1;
+		heros->experience = 0;
+		heros->level += 1;
 	}
-	return (heros);
+	if (heros->level >= 5)
+	{
+			if (!tmp || tmp < 100)
+				tmp = (int)time(NULL);
+			else if ((tmp % 100) == 0)
+			{
+				if (!vendredi)
+				{
+					vendredi = 1;
+					new_char("Vendredi");
+				}
+			}
+			else
+				tmp /= 10;
+	}
+	heros->experience += 1;
 }
 
 void			game_run()
@@ -163,29 +178,35 @@ void			game_run()
 	int				key;
 	WINDOW			*win;
 	t_heros_list	*head;
-	static int		i;
+	int				i;
+	int				cmp;
 
 	cbreak();
 	noecho();
-	manage_win(NEW_B, create_wintab(LINES, COLS / 4, 0, COLS - COLS / 4));
-	win = manage_win(NEW_B, create_wintab(LINES, COLS - COLS / 4, 0, 0));
 	halfdelay(8);
 	key = -1;
-	while (key != 127)
+	while (42)
 	{
-		if (key == -1)
-			i += 1;
-		head = manage_heros_list(GET, NULL);
-		while (head)
-		{
-			head->heros = tick_heros(head->heros); // PLAY EVERY HEROS
-			mvwprintw(win, 5, 5, "%5d %10s, lvl: %-5d at %-10s", i, head->heros->name, head->heros->level, head->heros->location); // PRINT EVERY HEROS
-			head = head->next;
-		}
-		key = wgetch(win);
 		manage_win_list(DELETE, NULL); // REFRESH MAIN SCREEN
 		manage_win(NEW_B, create_wintab(LINES, COLS / 4, 0, COLS - COLS / 4));
 		win = manage_win(NEW_B, create_wintab(LINES, COLS - COLS / 4, 0, 0));
+		if (key == -1)
+			i += 1;
+		head = manage_heros_list(GET, NULL);
+		cmp = 5;
+		mvwprintw(win, cmp - 2, 5, "%5s %10s %10s %10s %5s/%s", "id", "name", "level", "location", "xp", "xp to lvl"); // PRINT EVERY HEROS
+		while (head)
+		{
+			tick_heros(head->heros); // PLAY EVERY HEROS
+			mvwprintw(win, cmp, 5, "%5d %10s, %10d at %-10s | %d/%d", head->heros->id, head->heros->name, head->heros->level, head->heros->location, head->heros->experience, head->heros->level * 10); // PRINT EVERY HEROS
+			head = head->next;
+			cmp += 1;
+		}
+		usleep(100 * 800);
+		// wrefresh(win);
+		// key = wgetch(win);
+		// DO KEY
+		// key = -1;
 	}
 }
 

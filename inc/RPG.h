@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/19 05:49:56 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/20 02:06:32 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct		s_heros
 	int				strengh;
 	int				armor;
 	int				life;
+	int				id;
 }					t_heros;
 
 typedef struct			s_heros_list
