@@ -145,10 +145,14 @@ void			game_menu(t_gameplay *game)
 
 #include <time.h>
 
-void		tick_heros(t_heros *heros) // GAME MECHANISM EXAMPLE ??
+void		tick_heros(WINDOW *menu, t_heros *heros) // GAME MECHANISM EXAMPLE ??
 {
 	static int tmp;
 	static int vendredi;
+
+	mvwprintw(menu, 1, 1, "tmp: %d", tmp);
+	mvwprintw(menu, 2, 1, "vendredi: %d", vendredi);
+	wrefresh(menu);
 
 	if (heros->experience == heros->level * 10)
 	{
@@ -177,6 +181,7 @@ void			game_run()
 {
 	// int				key;
 	WINDOW			*win;
+	WINDOW			*menu;
 	t_heros_list	*head;
 	int				i;
 	int				cmp;
@@ -191,7 +196,7 @@ void			game_run()
 	{
 		write(fd, "test\n", 5);
 		manage_win_list(DELETE, NULL); // REFRESH MAIN SCREEN
-		manage_win(NEW_B, create_wintab(LINES, COLS / 4, 0, COLS - COLS / 4));
+		menu = manage_win(NEW_B, create_wintab(LINES, COLS / 4, 0, COLS - COLS / 4));
 		win = manage_win(NEW_B, create_wintab(LINES, COLS - COLS / 4, 0, 0));
 		// if (key == -1)
 		i += 1;
@@ -200,7 +205,7 @@ void			game_run()
 		mvwprintw(win, cmp - 2, 5, "%5s %10s %10s %10s %5s/%s", "id", "name", "level", "location", "xp", "xp to lvl"); // PRINT EVERY HEROS
 		while (head)
 		{
-			tick_heros(head->heros); // PLAY EVERY HEROS
+			tick_heros(menu, head->heros); // PLAY EVERY HEROS
 			mvwprintw(win, cmp, 5, "%5d %10s, %10d at %-10s | %d/%d", head->heros->id, head->heros->name, head->heros->level, head->heros->location, head->heros->experience, head->heros->level * 10); // PRINT EVERY HEROS
 			head = head->next;
 			cmp += 1;
