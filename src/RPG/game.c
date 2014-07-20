@@ -175,7 +175,7 @@ void		tick_heros(t_heros *heros) // GAME MECHANISM EXAMPLE ??
 
 void			game_run()
 {
-	int				key;
+	// int				key;
 	WINDOW			*win;
 	t_heros_list	*head;
 	int				i;
@@ -183,15 +183,18 @@ void			game_run()
 
 	cbreak();
 	noecho();
-	halfdelay(8);
-	key = -1;
+	// halfdelay(8);
+	// key = -1;
+	int fd = open("debug", O_CREAT | O_TRUNC | O_WRONLY, 0755);
+
 	while (42)
 	{
+		write(fd, "test\n", 5);
 		manage_win_list(DELETE, NULL); // REFRESH MAIN SCREEN
 		manage_win(NEW_B, create_wintab(LINES, COLS / 4, 0, COLS - COLS / 4));
 		win = manage_win(NEW_B, create_wintab(LINES, COLS - COLS / 4, 0, 0));
-		if (key == -1)
-			i += 1;
+		// if (key == -1)
+		i += 1;
 		head = manage_heros_list(GET, NULL);
 		cmp = 5;
 		mvwprintw(win, cmp - 2, 5, "%5s %10s %10s %10s %5s/%s", "id", "name", "level", "location", "xp", "xp to lvl"); // PRINT EVERY HEROS
@@ -202,12 +205,14 @@ void			game_run()
 			head = head->next;
 			cmp += 1;
 		}
-		usleep(100 * 800);
-		// wrefresh(win);
+		wrefresh(win);
+		usleep(100 * 8000);
+
 		// key = wgetch(win);
 		// DO KEY
 		// key = -1;
 	}
+	close(fd);
 }
 
 t_gameplay		*manage_game(int macro)
