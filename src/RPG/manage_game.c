@@ -25,7 +25,7 @@ void		tick_heros(WINDOW *menu, t_heros *heros) // GAME MECHANISM EXAMPLE ??
 				if (!vendredi)
 				{
 					vendredi = 1;
-					new_char("Vendredi");
+					manage_char(NEW, "Vendredi");
 				}
 			}
 			else

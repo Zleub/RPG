@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 11:55:49 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/25 02:58:30 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/25 06:26:30 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,8 @@ t_heros		*manage_char(int macro, STRING name)
 	// 	heros = new_heros;
 	else if (macro == LOAD)
 		load_heros(name);
+	else if (macro == NEW)
+		new_char(name);
 	else
 		ft_printf("useless call to manage_char\n");
 	return (NULL);
