@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/19 02:45:07 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/25 02:52:44 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ typedef struct				s_wintab_list
 # define WINTABLIST t_wintab_list
 
 WINDOW						*manage_ncurses(int macro);
+int							lines_center();
+int							cols_center();
+
 
 t_win_list					*manage_win_list(int macro, WINDOW *object);
 

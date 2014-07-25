@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/20 02:06:32 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/25 02:59:25 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,31 @@ enum				e_signal
 	SIG_WINCH, SIG_TSTP, SIG_CONT, SIG_INT
 };
 
-t_heros				*create_heros(void);
-void				print_heros(t_heros *character);
-void				save_heros(t_heros *character);
-t_heros				*load_heros(STRING name);
+/*
+** manage_char.c
+*/
+t_heros				*new_char(STRING str);
 
+
+/*
+** game_menu.c
+*/
+void				game_menu(t_gameplay *game);
+
+/*
+** game.c
+*/
 t_gameplay			*manage_game(int macro);
 
-void	ft_signal(void);
-void			resize(int sig);
+/*
+** new_game.c
+*/
+t_gameplay			*new_game(t_gameplay *game);
+void				ft_signal(void);
 
+/*
+** manage_char_list.c
+*/
 t_heros_list	*manage_heros_list(int macro, t_heros *heros);
 
 #endif
