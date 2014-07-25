@@ -14,7 +14,7 @@ NAME		=	libRPG.a
 LIB			=	ft
 HEADDIR		=	 ../../inc
 
-SRC			=	game.c \
+SRC			=	manage_game.c \
 				new_game.c \
 				game_menu.c \
 				manage_char.c \

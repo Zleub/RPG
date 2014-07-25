@@ -24,11 +24,11 @@ Bruenor
 
 /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/
 
-ID        NAME        ACTIVITY
+ID		NAME			ACTIVITY
 
-01    Bruenor     Managing
-02    Paleo       Hunting
-03    Giujy       Cooking
+01		Bruenor		Managing
+02		Paleo		Hunting
+03		Giujy		Cooking
 
 ```
 ##Notes
