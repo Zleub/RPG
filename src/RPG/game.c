@@ -182,6 +182,7 @@ void			game_run()
 	// int				key;
 	WINDOW			*win;
 	WINDOW			*menu;
+	t_heros			*heros;
 	t_heros_list	*head;
 	int				i;
 	int				cmp;
@@ -205,12 +206,13 @@ void			game_run()
 		mvwprintw(win, cmp - 2, 5, "%5s %10s %10s %10s %5s/%s", "id", "name", "level", "location", "xp", "xp to lvl"); // PRINT EVERY HEROS
 		while (head)
 		{
+			heros = head->heros;
 			tick_heros(menu, head->heros); // PLAY EVERY HEROS
-			mvwprintw(win, cmp, 5, "%5d %10s, %10d at %-10s | %d/%d", head->heros->id, head->heros->name, head->heros->level, head->heros->location, head->heros->experience, head->heros->level * 10); // PRINT EVERY HEROS
+			mvwprintw(win, cmp, 5, "%5d %10s, %10d at %-10s | %d/%d", heros->id, heros->name, heros->level, heros->location, heros->experience, heros->level * 10); // PRINT EVERY HEROS
 			head = head->next;
 			cmp += 1;
 		}
-		wrefresh(win);
+		wrefresh(win); // WRITE TEXT ON SCREEN
 		usleep(100 * 8000);
 
 		// key = wgetch(win);
