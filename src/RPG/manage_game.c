@@ -36,7 +36,7 @@ void		tick_heros(WINDOW *menu, t_heros *heros) // GAME MECHANISM EXAMPLE ??
 
 void			game_run()
 {
-	// int				key;
+	int				key;
 	WINDOW			*win;
 	WINDOW			*menu;
 	t_heros			*heros;
@@ -44,16 +44,28 @@ void			game_run()
 	int				i;
 	int				cmp;
 
-	cbreak();
+	// cbreak();
 	noecho();
 	// halfdelay(8);
 	// key = -1;
-	// int fd = open("debug", O_CREAT | O_TRUNC | O_WRONLY, 0755);
+	int fd = open("debug", O_CREAT | O_TRUNC | O_WRONLY, 0755);
 	i = 0;
 	while (42)
 	{
-		// write(fd, "test\n", 5);
 		manage_win_list(DELETE, NULL); // DELETE MAIN SCREEN
+
+		timeout(1);
+		key = getch();
+		if (key != -1)
+		{
+			if (key == KEY_LEFT)
+				write(fd, "test ", 5);
+			ft_putnbr_fd(fd, key);
+			ft_putendl_fd("", fd);
+			key = -1;
+		}
+
+
 		menu = manage_win(NEW_B, create_wintab(LINES, COLS / 4, 0, COLS - COLS / 4));
 		win = manage_win(NEW_B, create_wintab(LINES, COLS - COLS / 4, 0, 0));
 		// if (key == -1)
@@ -72,7 +84,7 @@ void			game_run()
 		wrefresh(win); // WRITE TEXT ON SCREEN
 		usleep(100 * 8000);
 
-		// key = wgetch(win);
+
 		// DO KEY
 		// key = -1;
 	}
@@ -105,4 +117,3 @@ t_gameplay		*manage_game(int macro)
 		ft_printf("Useless call to manage_game\n");
 	return (NULL);
 }
-
