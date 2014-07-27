@@ -6,11 +6,21 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:55:19 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/17 16:34:13 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/25 02:52:10 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <curse.h>
+
+int			cols_center(char *str)
+{
+	return ((COLS - ft_strlen(str)) / 2);
+}
+
+int			lines_center()
+{
+	return (LINES / 2);
+}
 
 WINDOW	*manage_ncurses(int macro)
 {

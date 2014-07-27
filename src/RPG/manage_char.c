@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 11:55:49 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/20 02:06:43 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/25 02:58:30 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,41 @@ t_heros				*load_heros(STRING name)
 		}
 		close (fd);
 	}
+	return (new);
+}
+
+int					ft_hash(char *line)
+{
+	int				hash;
+	int				c;
+
+	hash = 5381;
+	while ((c = *line++))
+		hash = ((hash << 5) + hash) ^ c;
+	if (hash < 0)
+		return (hash * -1);
+	else
+		return (hash);
+}
+
+t_heros				*new_char(STRING str)
+{
+	t_heros			*new;
+	int				hash;
+	static int		cmp;
+
+	new = create_heros();
+	hash = ft_hash(str);
+	new->name = str;
+	new->location = "Citadel";
+	new->experience = 0;
+	new->level = 0;
+	new->armor = 0;
+	new->strengh = hash % 21;
+	new->life = 20;
+	new->id = cmp;
+	manage_heros_list(ADD, new);
+	cmp += 1;
 	return (new);
 }
 
