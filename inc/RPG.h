@@ -6,7 +6,7 @@
 /*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/27 11:37:04 by Arno             ###   ########.fr       */
+/*   Updated: 2014/07/27 11:41:33 by Arno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ enum				e_signal
 ** manage_char.c
 */
 t_heros				*new_char(STRING str);
-
+t_heros		*manage_char(int macro, STRING name);
 
 /*
 ** game_menu.c
