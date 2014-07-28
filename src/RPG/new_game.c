@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/25 02:49:04 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/25 02:51:23 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/28 12:13:21 by Arno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_gameplay	*create_game(void)
 
 	new = (t_gameplay*)malloc(sizeof(t_gameplay));
 	new->status = -1;
+	new->select = -1;
+	new->count = -1;
 	return (new);
 }
 
@@ -27,6 +29,8 @@ t_gameplay		*new_game(t_gameplay *game)
 	{
 		game = create_game();
 		game->status = MENU;
+		game->count = 0;
+		game->select = 0;
 		ft_signal();
 		manage_ncurses(NEW);
 	}

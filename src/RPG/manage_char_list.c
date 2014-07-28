@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_char_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/19 02:31:23 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/19 05:52:57 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/28 12:11:24 by Arno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_heros_list	*add_heros_list(t_heros_list *head, t_heros *heros)
 		tmp->next = create_heros_list();
 		tmp->next->heros = heros;
 	}
+	manage_game(GET)->count += 1;
 	return (head);
 }
 

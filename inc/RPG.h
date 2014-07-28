@@ -6,7 +6,7 @@
 /*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/27 11:41:33 by Arno             ###   ########.fr       */
+/*   Updated: 2014/07/28 12:11:58 by Arno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct			s_heros_list
 typedef struct	s_gameplay
 {
 	int			status;
+	int			count;
+	int			select;
 }				t_gameplay;
 
 enum				e_content
