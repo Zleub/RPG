@@ -2,37 +2,36 @@
 #include <string.h>
 #include <time.h>
 
-void		tick_heros(t_heros *heros) // GAME MECHANISM EXAMPLE ??
+void		event_vendredi(t_heros *heros)
 {
 	static int tmp;
-	static int vendredi;
 
-	if (heros->experience == heros->level * 10)
-	{
-		heros->experience = 0;
-		heros->level += 1;
-	}
 	if (heros->level >= 5)
 	{
 		if (!tmp || tmp < 100)
 			tmp = (int)time(NULL);
 		else if ((tmp % 100) == 0)
-		{
-			if (!vendredi)
-			{
-				vendredi = 1;
-				manage_char(NEW, "Vendredi");
-			}
-		}
+			manage_char(NEW, "Vendredi");
 		else
 			tmp /= 10;
 	}
+}
+
+void		tick_heros(t_heros *heros) // GAME MECHANISM EXAMPLE ??
+{
+	if (manage_game(GET)->count == 1)
+		event_vendredi(heros);
 
 	heros->cmp += 1;
 	if (heros->cmp == 10)
 	{
 		heros->experience += 1;
 		heros->cmp = 0;
+	}
+	if (heros->experience == heros->level * 10)
+	{
+		heros->experience = 0;
+		heros->level += 1;
 	}
 }
 
@@ -61,19 +60,52 @@ void			get_key(int fd)
 	}
 }
 
+void			print_menu(WINDOW *menu)
+{
+	int			i;
+	t_heros_list	*head;
+
+	if (manage_game(GET)->select > 0)
+	{
+		i = manage_game(GET)->select - 1;
+		head = manage_heros_list(GET, NULL);
+		while (i)
+		{
+			head = head->next;
+			i -= 1;
+		}
+		mvwprintw(menu, 1, 1, "name: %s", head->heros->name);
+		mvwprintw(menu, 2, 1, "str: %d", head->heros->strengh);
+		mvwprintw(menu, 3, 1, "def: %d", head->heros->armor);
+		mvwprintw(menu, 4, 1, "xp: %d", head->heros->experience);
+	}
+}
+
+void			print_main(WINDOW *win)
+{
+	t_heros_list	*head;
+	t_heros			*heros;
+	int				cmp;
+
+	cmp = 5;
+	mvwprintw(win, cmp - 2, 5, "%5s %10s %10s %10s %5s/%s", "id", "name", "level", "location", "xp", "xp to lvl"); // PRINT EVERY HEROS
+	head = manage_heros_list(GET, NULL);
+	while (head)
+	{
+		heros = head->heros;
+		mvwprintw(win, cmp, 5, "%5d %10s, %10d at %-10s | %d/%d", heros->id, heros->name, heros->level, heros->location, heros->experience, heros->level * 10); // PRINT EVERY HEROS
+		tick_heros(head->heros); // PLAY EVERY HEROS
+		head = head->next;
+		cmp += 1;
+	}
+}
+
 void			game_run()
 {
 	WINDOW			*win;
 	WINDOW			*menu;
-	t_heros			*heros;
-	t_heros_list	*head;
-	int				i;
-	int				cmp;
 
-	// cbreak();
 	noecho();
-	// key = -1;
-	i = 0;
 	int fd = open("debug", O_CREAT | O_TRUNC | O_WRONLY, 0755);
 	while (42)
 	{
@@ -83,41 +115,11 @@ void			game_run()
 
 		menu = manage_win(NEW_B, create_wintab(LINES, COLS / 4, 0, COLS - COLS / 4));
 		win = manage_win(NEW_B, create_wintab(LINES, COLS - COLS / 4, 0, 0));
-		// if (key == -1)
-		i += 1;
-		cmp = 5;
-		mvwprintw(win, cmp - 2, 5, "%5s %10s %10s %10s %5s/%s", "id", "name", "level", "location", "xp", "xp to lvl"); // PRINT EVERY HEROS
-		if (manage_game(GET)->select > 0)
-		{
-			int i = manage_game(GET)->select - 1;
-			head = manage_heros_list(GET, NULL);
-			while (i)
-			{
-				head = head->next;
-				i -= 1;
-			}
-			mvwprintw(menu, 1, 1, "name: %s", head->heros->name);
-			mvwprintw(menu, 2, 1, "str: %d", head->heros->strengh);
-			mvwprintw(menu, 3, 1, "def: %d", head->heros->armor);
-			mvwprintw(menu, 4, 1, "xp: %d", head->heros->experience);
-		}
-
-		head = manage_heros_list(GET, NULL);
-		while (head)
-		{
-			heros = head->heros;
-			mvwprintw(win, cmp, 5, "%5d %10s, %10d at %-10s | %d/%d", heros->id, heros->name, heros->level, heros->location, heros->experience, heros->level * 10); // PRINT EVERY HEROS
-			tick_heros(head->heros); // PLAY EVERY HEROS
-			head = head->next;
-			cmp += 1;
-		}
+		print_main(win);
+		print_menu(menu);
 		wrefresh(win); // WRITE TEXT ON SCREEN
 		wrefresh(menu); // WRITE TEXT ON SCREEN
 		usleep(100 * 800);
-
-
-		// DO KEY
-		// key = -1;
 	}
 	close(fd);
 }
@@ -129,7 +131,7 @@ t_gameplay		*manage_game(int macro)
 	if (macro == GET)
 		return (game);
 	else if (macro == NEW)
-		game = new_game(game);
+		game = game_new(game);
 	else if (macro == DELETE)
 	{
 		endwin();
@@ -142,9 +144,7 @@ t_gameplay		*manage_game(int macro)
 		else if (game->status == RUN)
 			game_run();
 		else
-		{
-			;
-		}
+			exit (0);
 	}
 	else
 		ft_printf("Useless call to manage_game\n");

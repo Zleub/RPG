@@ -15,7 +15,7 @@ LIB			=	ft
 HEADDIR		=	 ../../inc
 
 SRC			=	manage_game.c \
-				new_game.c \
+				game_new.c \
 				game_menu.c \
 				manage_char.c \
 				manage_char_list.c \

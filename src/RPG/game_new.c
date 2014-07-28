@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_game.c                                         :+:      :+:    :+:   */
+/*   game_new.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/25 02:49:04 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/28 12:13:21 by Arno             ###   ########.fr       */
+/*   Updated: 2014/07/28 17:39:36 by Arno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_gameplay	*create_game(void)
 	return (new);
 }
 
-t_gameplay		*new_game(t_gameplay *game)
+t_gameplay		*game_new(t_gameplay *game)
 {
 	if (!game)
 	{
@@ -38,7 +38,7 @@ t_gameplay		*new_game(t_gameplay *game)
 	{
 		free(game);
 		game = NULL;
-		new_game(game);
+		game_new(game);
 	}
 	return (game);
 }

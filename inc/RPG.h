@@ -6,7 +6,7 @@
 /*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/28 17:26:14 by Arno             ###   ########.fr       */
+/*   Updated: 2014/07/28 17:39:07 by Arno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_gameplay			*manage_game(int macro);
 /*
 ** new_game.c
 */
-t_gameplay			*new_game(t_gameplay *game);
+t_gameplay			*game_new(t_gameplay *game);
 void				ft_signal(void);
 
 /*
