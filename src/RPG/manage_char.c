@@ -6,7 +6,7 @@
 /*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 11:55:49 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/27 11:41:02 by Arno             ###   ########.fr       */
+/*   Updated: 2014/07/28 17:27:36 by Arno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_heros				*create_heros(void)
 	new->armor = -1;
 	new->life = -1;
 	new->id = -1;
+	new->cmp = -1;
 	return (new);
 }
 
@@ -135,6 +136,7 @@ t_heros				*new_char(STRING str)
 	new->strengh = hash % 21;
 	new->life = 20;
 	new->id = cmp;
+	new->cmp = 0;
 	manage_heros_list(ADD, new);
 	cmp += 1;
 	return (new);

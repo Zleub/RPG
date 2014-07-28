@@ -6,7 +6,6 @@ void		tick_heros(t_heros *heros) // GAME MECHANISM EXAMPLE ??
 {
 	static int tmp;
 	static int vendredi;
-	static int cmp;
 
 	if (heros->experience == heros->level * 10)
 	{
@@ -28,11 +27,12 @@ void		tick_heros(t_heros *heros) // GAME MECHANISM EXAMPLE ??
 		else
 			tmp /= 10;
 	}
-	cmp += 1;
-	if (cmp == 10)
+
+	heros->cmp += 1;
+	if (heros->cmp == 10)
 	{
 		heros->experience += 1;
-		cmp = 0;
+		heros->cmp = 0;
 	}
 }
 
@@ -99,6 +99,7 @@ void			game_run()
 			mvwprintw(menu, 1, 1, "name: %s", head->heros->name);
 			mvwprintw(menu, 2, 1, "str: %d", head->heros->strengh);
 			mvwprintw(menu, 3, 1, "def: %d", head->heros->armor);
+			mvwprintw(menu, 4, 1, "xp: %d", head->heros->experience);
 		}
 
 		head = manage_heros_list(GET, NULL);

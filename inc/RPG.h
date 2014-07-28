@@ -6,7 +6,7 @@
 /*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/28 12:11:58 by Arno             ###   ########.fr       */
+/*   Updated: 2014/07/28 17:26:14 by Arno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct		s_heros
 	int				armor;
 	int				life;
 	int				id;
+	int				cmp;
 }					t_heros;
 
 typedef struct			s_heros_list
