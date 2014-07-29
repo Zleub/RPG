@@ -23,15 +23,19 @@ void		tick_heros(t_heros *heros) // GAME MECHANISM EXAMPLE ??
 		event_vendredi(heros);
 
 	heros->cmp += 1;
-	if (heros->cmp == 10)
+	if (heros->cmp % 10 == 0)
 	{
 		heros->experience += 1;
-		heros->cmp = 0;
 	}
 	if (heros->experience == heros->level * 10)
 	{
 		heros->experience = 0;
 		heros->level += 1;
+	}
+	if (heros->cmp == 365 * 60)
+	{
+		heros->age += 1;
+		heros->cmp = 0;
 	}
 }
 
@@ -74,10 +78,14 @@ void			print_menu(WINDOW *menu)
 			head = head->next;
 			i -= 1;
 		}
-		mvwprintw(menu, 1, 1, "name: %s", head->heros->name);
+		mvwprintw(menu, 1, 1, "%s, lvl %d", head->heros->name, head->heros->level);
 		mvwprintw(menu, 2, 1, "str: %d", head->heros->strengh);
 		mvwprintw(menu, 3, 1, "def: %d", head->heros->armor);
-		mvwprintw(menu, 4, 1, "xp: %d", head->heros->experience);
+		mvwprintw(menu, 4, 1, "age: %d", head->heros->age);
+		mvwprintw(menu, 5, 1, "xp: %d", head->heros->experience);
+		mvwprintw(menu, 6, 1, "cmp: %d", head->heros->cmp);
+		mvwprintw(menu, 7, 1, "state: %s", head->heros->state);
+		mvwprintw(menu, 8, 1, "job: %s", head->heros->job);
 	}
 }
 

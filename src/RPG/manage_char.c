@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_char.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 11:55:49 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/28 17:27:36 by Arno             ###   ########.fr       */
+/*   Updated: 2014/07/29 14:08:56 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ t_heros				*create_heros(void)
 	new->life = -1;
 	new->id = -1;
 	new->cmp = -1;
+	new->age = -1;
+	new->state = NULL;
+	new->job = NULL;
 	return (new);
 }
 
@@ -137,6 +140,9 @@ t_heros				*new_char(STRING str)
 	new->life = 20;
 	new->id = cmp;
 	new->cmp = 0;
+	new->age = 15;
+	new->state = "NONE";
+	new->job = "rover";
 	manage_heros_list(ADD, new);
 	cmp += 1;
 	return (new);

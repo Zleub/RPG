@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_menu.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/25 02:54:22 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/27 11:40:51 by Arno             ###   ########.fr       */
+/*   Updated: 2014/07/29 13:52:10 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void			get_name(WINDOW *win)
 {
 	char	str[80];
 	int		validate;
-	t_heros	*heros;
+	// t_heros	*heros;
 
 	validate = 0;
 	while (validate == 0)
@@ -49,7 +49,7 @@ void			get_name(WINDOW *win)
 			// if (!manage_heros_list(LOAD, heros))
 			// {
 				// manage_ char(SET, heros);
-				heros = new_char(str);
+				new_char(str);
 				// manage_heros_list(ADD, heros);
 				// CREATE A NEW GAME
 			// }

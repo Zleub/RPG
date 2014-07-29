@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPG.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/28 17:39:07 by Arno             ###   ########.fr       */
+/*   Updated: 2014/07/29 15:04:39 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 typedef struct		s_heros
 {
-	STRING			name;
-	STRING			location;
+	char			*name;
+	char			*location;
 	int				level;
 	int				experience;
 	int				strengh;
@@ -34,6 +34,9 @@ typedef struct		s_heros
 	int				life;
 	int				id;
 	int				cmp;
+	int				age;
+	char			*state;
+	char			*job;
 }					t_heros;
 
 typedef struct			s_heros_list
@@ -47,6 +50,8 @@ typedef struct	s_gameplay
 	int			status;
 	int			count;
 	int			select;
+	char		**calendar;
+	int			calendar_size;
 }				t_gameplay;
 
 enum				e_content
