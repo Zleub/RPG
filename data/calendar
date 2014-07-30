@@ -1,6 +1,6 @@
-eat
-spare
-eat
-spare
-eat
-sleep
+eat: 2
+spare: 15
+eat: 2
+spare: 15
+eat: 2
+sleep: 24

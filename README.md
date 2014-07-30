@@ -34,27 +34,11 @@ ID		NAME			ACTIVITY
 ##Notes
 
 ```
-shortcuts:
-	ctrl + up/down : print character list one more/less from top
-	ctrl + l : logs
-```
-```
-reference:
-	managegame :    GET
-					SET
-
-	managechar :    GET
-					SET
-
-	managecharlist: GET
-					ADD
-					LOAD
-					PRINT
-```
-##Save File Example
-
-```
-{
-	"JSON": "format"
-}
+datas format:
+- calendar
+	action: time
+- lists
+	"-" based hierarchie
+- jobs
+	location based hierarchie
 ```
