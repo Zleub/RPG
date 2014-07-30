@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/25 02:49:04 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/29 15:09:21 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/30 22:42:16 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_gameplay	*create_game(void)
 	new->select = -1;
 	new->count = -1;
 	new->calendar = NULL;
-	new->calendar_size = -1;
+	new->day_size = -1;
 	return (new);
 }
 

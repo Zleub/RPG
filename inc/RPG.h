@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/29 15:04:39 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/30 22:42:09 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct	s_gameplay
 	int			count;
 	int			select;
 	char		**calendar;
-	int			calendar_size;
+	int			day_size;
 }				t_gameplay;
 
 enum				e_content
