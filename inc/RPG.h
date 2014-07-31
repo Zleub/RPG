@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPG.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/30 22:42:09 by adebray          ###   ########.fr       */
+/*   Updated: 2014/07/31 04:45:54 by Arno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,21 @@
 
 #define STRING char*
 
-typedef struct		s_heros
+typedef struct			s_heros
 {
-	char			*name;
-	char			*location;
-	int				level;
-	int				experience;
-	int				strengh;
-	int				armor;
-	int				life;
-	int				id;
-	int				cmp;
-	int				age;
-	char			*state;
-	char			*job;
-}					t_heros;
+	char				*name;
+	char				*location;
+	int					level;
+	int					experience;
+	int					strengh;
+	int					armor;
+	int					life;
+	int					id;
+	int					cmp;
+	int					age;
+	char				*state;
+	char				*job;
+}						t_heros;
 
 typedef struct			s_heros_list
 {
@@ -45,14 +45,19 @@ typedef struct			s_heros_list
 	struct s_heros_list	*next;
 }						t_heros_list;
 
-typedef struct	s_gameplay
+typedef struct			s_calendar_list
 {
-	int			status;
-	int			count;
-	int			select;
-	char		**calendar;
-	int			day_size;
-}				t_gameplay;
+	char				*event;
+	int					time;
+}						t_calendar_list;
+
+typedef struct			s_gameplay
+{
+	int					status;
+	int					count;
+	int					select;
+}						t_gameplay;
+
 
 enum				e_content
 {
