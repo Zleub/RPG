@@ -15,7 +15,6 @@ t_biome_list		*create_biome_list(void)
 t_biome_list		*new_biome_list(void)
 {
 	int					fd;
-	int					i;
 	char				*buffer;
 	t_biome_list		*head;
 	t_biome_list		*tmp;
@@ -23,29 +22,10 @@ t_biome_list		*new_biome_list(void)
 	if (access("data/biome_list", R_OK) == -1)
 		return (NULL);
 	fd = open("data/biome_list", O_RDONLY);
+
+
 	get_next_line(fd, &buffer);
-	i = 0;
-	while (!ft_isalpha(buffer[i]))
-		i += 1;
 
-	head = create_biome_list();
-
-	head->biome = ft_strdup(buffer + i);
-	// head->data = ft_atoi(buffer + i + 1);
-
-	tmp = head;
-
-	while (get_next_line(fd, &buffer) != 0)
-	{
-		tmp->next = create_biome_list();
-		tmp = tmp->next;
-		i = 0;
-		while (buffer[i] != ':')
-			i += 1;
-		tmp->biome = ft_strndup(buffer, i);
-		// tmp->data = ft_atoi(buffer + i + 1);
-		tmp->next = head;
-	}
 
 	close(fd);
 	return (head);
