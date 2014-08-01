@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/01 07:34:32 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/01 09:58:42 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct				s_biome_list
 	char					*biome;
 	int						data;
 	struct s_biome_list		*next;
+	struct s_biome_list		*top;
 }							t_biome_list;
 
 typedef struct			s_heros

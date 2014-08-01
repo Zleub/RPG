@@ -47,6 +47,7 @@ char		**new_map(int hash)
 	map = create_map();
 
 	manage_biome_list(NEW);
+	manage_biome_list(PRINT);
 
 	map[6][6] = 1;
 
@@ -90,7 +91,7 @@ void		print_map(char **map)
 		while (j < MAPSIZE)
 		{
 			if (map[i][j] == 0)
-				ft_printf(" \e[30mempty\e[0m ");
+				ft_printf(" \e[90mempty\e[0m ");
 			else if (map[i][j] == 1)
 				ft_printf(" \e[37mCitad\e[0m ");
 			else if (map[i][j] == 2)

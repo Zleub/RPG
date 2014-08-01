@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:52:25 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/01 05:22:06 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/01 15:28:05 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int					main(void)
 
 	// endwin();
 	// delwin(manage_ncurses(GET));
-	ft_printf("%d\n", ft_hash("Arnauc"));
-	manage_map(NEW, ft_hash("Arnauc"));
+	ft_printf("%d\n", ft_hash("Arnaud"));
+	manage_map(NEW, ft_hash("Arnaud"));
 	manage_map(PRINT, 0);
 
 	return (0);

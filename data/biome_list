@@ -3,9 +3,9 @@ citadel:
 -- Fort
 ground:
 - Plains
--- Forest
+-- Fields
 - Forest
 - Hill
 water:
-- Lac {circle}
-- River {line}
+- Lac: circle
+- River: line
