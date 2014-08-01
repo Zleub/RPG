@@ -19,6 +19,9 @@ SRC			=	manage_game.c \
 				game_menu.c \
 				manage_char.c \
 				manage_char_list.c \
+				manage_calendar.c \
+				manage_map.c \
+				manage_biome_list.c \
 				signal.c
 
 OBJ			= $(subst .c,.o,$(SRC))

@@ -1,11 +1,11 @@
-Wilderness
-- Fort
-Forest
-Field
-Mountain
-Hill
-Beach
-Desert
-Glacier
-Step
-Toundra
+citadel:
+- Wilderness
+-- Fort
+ground:
+- Plains
+-- Forest
+- Forest
+- Hill
+water:
+- Lac {circle}
+- River {line}

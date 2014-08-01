@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_char.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 11:55:49 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/31 04:47:37 by Arno             ###   ########.fr       */
+/*   Updated: 2014/07/31 23:41:11 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ t_heros				*create_heros(void)
 	new->life = -1;
 	new->id = -1;
 	new->cmp = -1;
+	new->ticks = -1;
 	new->age = -1;
-	new->state = NULL;
 	new->job = NULL;
+	new->state = NULL;
 	return (new);
 }
 
@@ -132,7 +133,7 @@ t_heros				*new_char(STRING str)
 	new = create_heros();
 	hash = ft_hash(str);
 	new->name = ft_strdup(str);
-	new->location = "Citadel";
+	new->location = "Wilderness";
 	new->experience = 0;
 	new->level = 0;
 	new->armor = 0;
@@ -140,8 +141,9 @@ t_heros				*new_char(STRING str)
 	new->life = 20;
 	new->id = cmp;
 	new->cmp = 0;
+	new->ticks = 0;
 	new->age = 15;
-	new->state = "NONE";
+	new->state = manage_calendar(GET);
 	new->job = "rover";
 	manage_heros_list(ADD, new);
 	cmp += 1;
@@ -156,8 +158,8 @@ t_heros		*manage_char(int macro, STRING name)
 		return (heros);
 	// else if (macro == SET)
 	// 	heros = new_heros;
-	else if (macro == LOAD)
-		load_heros(name);
+	// else if (macro == LOAD)
+	// 	load_heros(name);
 	else if (macro == NEW)
 		new_char(name);
 	else

@@ -17,25 +17,34 @@ void		event_vendredi(t_heros *heros)
 	}
 }
 
+void		event_calendar(t_heros *heros)
+{
+	heros->cmp += 1;
+	if (heros->cmp == heros->state->time)
+	{
+		heros->state = heros->state->next;
+		heros->cmp = 0;
+	}
+}
+
 void		tick_heros(t_heros *heros) // GAME MECHANISM EXAMPLE ??
 {
 	if (manage_game(GET)->count == 1)
 		event_vendredi(heros);
 
-	heros->cmp += 1;
-	if (heros->cmp % 10 == 0)
-	{
+	event_calendar(heros);
+	heros->ticks += 1;
+	if (heros->ticks % 10 == 0)
 		heros->experience += 1;
-	}
 	if (heros->experience == heros->level * 10)
 	{
 		heros->experience = 0;
 		heros->level += 1;
 	}
-	if (heros->cmp == 365 * 60)
+	if (heros->ticks == 36 * 600) // 60 is the sum of every calendar step
 	{
 		heros->age += 1;
-		heros->cmp = 0;
+		heros->ticks = 0;
 	}
 }
 
@@ -83,9 +92,13 @@ void			print_menu(WINDOW *menu)
 		mvwprintw(menu, 3, 1, "def: %d", head->heros->armor);
 		mvwprintw(menu, 4, 1, "age: %d", head->heros->age);
 		mvwprintw(menu, 5, 1, "xp: %d", head->heros->experience);
-		mvwprintw(menu, 6, 1, "cmp: %d", head->heros->cmp);
-		mvwprintw(menu, 7, 1, "state: %s", head->heros->state);
-		mvwprintw(menu, 8, 1, "job: %s", head->heros->job);
+		mvwprintw(menu, 6, 1, "state: %s", head->heros->state->event);
+		mvwprintw(menu, 7, 1, "job: %s", head->heros->job);
+		if (DEBUG == 1)
+		{
+			mvwprintw(menu, 8, 1, "cmp: %d", head->heros->cmp);
+			mvwprintw(menu, 9, 1, "ticks: %d", head->heros->ticks);
+		}
 	}
 }
 
@@ -96,12 +109,12 @@ void			print_main(WINDOW *win)
 	int				cmp;
 
 	cmp = 5;
-	mvwprintw(win, cmp - 2, 5, "%5s %10s %10s %10s %5s/%s", "id", "name", "level", "location", "xp", "xp to lvl"); // PRINT EVERY HEROS
+	mvwprintw(win, cmp - 2, 5, "%5s %10s %10s %10s %5s/%s", "id", "name", "level", "activity", "xp", "xp to lvl"); // PRINT EVERY HEROS
 	head = manage_heros_list(GET, NULL);
 	while (head)
 	{
 		heros = head->heros;
-		mvwprintw(win, cmp, 5, "%5d %10s, %10d at %-10s | %d/%d", heros->id, heros->name, heros->level, heros->location, heros->experience, heros->level * 10); // PRINT EVERY HEROS
+		mvwprintw(win, cmp, 5, "%5d %10s, %10d %-10s | %d/%d", heros->id, heros->name, heros->level, heros->state->event, heros->experience, heros->level * 10); // PRINT EVERY HEROS
 		tick_heros(head->heros); // PLAY EVERY HEROS
 		head = head->next;
 		cmp += 1;

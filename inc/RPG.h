@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPG.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/31 04:45:54 by Arno             ###   ########.fr       */
+/*   Updated: 2014/08/01 07:34:32 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,23 @@
 
 #include <stdio.h>
 
-
+#define DEBUG 1
+#define MAPSIZE 13
 #define STRING char*
+
+typedef struct				s_calendar_list
+{
+	char					*event;
+	int						time;
+	struct s_calendar_list	*next;
+}							t_calendar_list;
+
+typedef struct				s_biome_list
+{
+	char					*biome;
+	int						data;
+	struct s_biome_list		*next;
+}							t_biome_list;
 
 typedef struct			s_heros
 {
@@ -34,9 +49,10 @@ typedef struct			s_heros
 	int					life;
 	int					id;
 	int					cmp;
+	int					ticks;
 	int					age;
-	char				*state;
 	char				*job;
+	t_calendar_list		*state;
 }						t_heros;
 
 typedef struct			s_heros_list
@@ -45,19 +61,12 @@ typedef struct			s_heros_list
 	struct s_heros_list	*next;
 }						t_heros_list;
 
-typedef struct			s_calendar_list
-{
-	char				*event;
-	int					time;
-}						t_calendar_list;
-
 typedef struct			s_gameplay
 {
 	int					status;
 	int					count;
 	int					select;
 }						t_gameplay;
-
 
 enum				e_content
 {
@@ -100,5 +109,20 @@ void				ft_signal(void);
 ** manage_char_list.c
 */
 t_heros_list	*manage_heros_list(int macro, t_heros *heros);
+
+/*
+** manage_calendar.c
+*/
+t_calendar_list	*manage_calendar(int macro);
+
+/*
+** manage_map.c
+*/
+char			**manage_map(int macro, int hash);
+
+/*
+** manage_biome_list.c
+*/
+t_biome_list		*manage_biome_list(int macro);
 
 #endif
