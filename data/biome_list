@@ -1,11 +1,11 @@
 citadel:
-- Wilderness
--- Fort
+- Wilderness: unique
+-- Fort: unique
 ground:
-- Plains
--- Fields
-- Forest
-- Hill
+- Plains: fill
+-- Fields: unique
+- Forest: fill
+- Hill: fill
 water:
 - Lac: circle
 - River: line

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:52:25 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/01 15:28:05 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/02 04:52:52 by Arno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@
 int					ft_hash(char *line);
 
 
-int					main(void)
+int					main(int argc, char **argv)
 {
 	// manage_game(NEW);
 	// manage_game(PRINT);
 
 	// endwin();
 	// delwin(manage_ncurses(GET));
-	ft_printf("%d\n", ft_hash("Arnaud"));
-	manage_map(NEW, ft_hash("Arnaud"));
-	manage_map(PRINT, 0);
 
+	if (argc == 2)
+	{
+		manage_map(NEW, ft_hash(argv[1]));
+		manage_map(PRINT, 0);
+	}
 	return (0);
 }

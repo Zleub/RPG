@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPG.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/01 09:58:42 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/02 04:31:39 by Arno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct				s_biome_list
 	int						data;
 	struct s_biome_list		*next;
 	struct s_biome_list		*top;
+	int						id;
 }							t_biome_list;
 
 typedef struct			s_heros
@@ -82,6 +83,11 @@ enum				e_gameplay
 enum				e_signal
 {
 	SIG_WINCH, SIG_TSTP, SIG_CONT, SIG_INT
+};
+
+enum				e_biome_enum
+{
+	EMPTY, UNIQUE, FILL, CIRCLE, RECT, LINE
 };
 
 /*
