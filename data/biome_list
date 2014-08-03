@@ -4,8 +4,9 @@ citadel:
 ground:
 - Plains: fill
 -- Fields: unique
-- Forest: fill
-- Hill: fill
+- Forest: circle
+- Hill: circle
+- Mountain: unique
 water:
 - Lac: circle
 - River: line

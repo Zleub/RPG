@@ -114,7 +114,7 @@ void			print_main(WINDOW *win)
 	while (head)
 	{
 		heros = head->heros;
-		mvwprintw(win, cmp, 5, "%5d %10s, %10d %-10s | %d/%d", heros->id, heros->name, heros->level, heros->state->event, heros->experience, heros->level * 10); // PRINT EVERY HEROS
+		mvwprintw(win, cmp, 5, "%5d %10s %10d %-10s | %d/%d", heros->id, heros->name, heros->level, heros->state->event, heros->experience, heros->level * 10); // PRINT EVERY HEROS
 		tick_heros(head->heros); // PLAY EVERY HEROS
 		head = head->next;
 		cmp += 1;

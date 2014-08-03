@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:52:25 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/02 04:52:52 by Arno             ###   ########.fr       */
+/*   Updated: 2014/08/03 01:41:44 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int					ft_hash(char *line);
 
 int					main(int argc, char **argv)
 {
+	// (void)argc;
+	// (void)argv;
 	// manage_game(NEW);
 	// manage_game(PRINT);
 

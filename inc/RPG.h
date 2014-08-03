@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPG.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/02 04:31:39 by Arno             ###   ########.fr       */
+/*   Updated: 2014/08/03 03:49:02 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include <stdio.h>
 
 #define DEBUG 1
-#define MAPSIZE 13
+#define MAPSIZE 15
 #define STRING char*
 
 typedef struct				s_calendar_list
@@ -87,7 +87,7 @@ enum				e_signal
 
 enum				e_biome_enum
 {
-	EMPTY, UNIQUE, FILL, CIRCLE, RECT, LINE
+	EMPTY = -1, UNIQUE, FILL, CIRCLE, RECT, LINE
 };
 
 /*
