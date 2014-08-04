@@ -30,12 +30,54 @@ char		**create_map()
 
 size_t		update_hash(size_t hash, int diviser)
 {
+	ft_printf("if %d (hash) / %d (diviser) = %d <= 5381\n", hash, diviser, hash /diviser);
 	if (hash / diviser <= 5381)
 	{
-		return (INT_MAX - hash % diviser);
+		ft_printf("return %d\n", INT_MAX - hash / diviser);
+		return (INT_MAX - hash / diviser);
 	}
 	else
 		return (hash / diviser);
+}
+
+void		print_hash(int hash)
+{
+	ft_printf("print_hash: %d\n", hash);
+}
+
+int		manage_hash(int macro, int nbr)
+{
+	int				tmp;
+	static int		hash;
+	static int		initial;
+
+	if (macro == GET)
+	{
+		if (hash / nbr <= 5381)
+		{
+			// ft_printf("1.1 %d\n", hash);
+			hash = hash / nbr ^ initial;
+			// ft_printf("1.2 %d\n", hash);
+		}
+		else
+		{
+			// ft_printf("2.1 %d\n", hash / nbr);
+			hash = hash / nbr;
+			// ft_printf("2.2 %d\n", hash / nbr);
+		}
+		tmp = hash % nbr;
+		return (tmp);
+	}
+	else if (macro == SET)
+	{
+		hash = nbr;
+		initial = nbr;
+	}
+	else if (macro == PRINT)
+		print_hash(hash);
+	else
+		ft_printf("useless call to manage_hash\n");
+	return (0);
 }
 
 int		ft_abs(int x)
@@ -66,56 +108,30 @@ void		print_array(char **map)
 
 }
 
-int			draw_disk(char **map, int x, int y, int nbr)
+void			draw_disk(char **map, int x, int y, int bonus)
 {
-	int q = nbr % 3 + 1;
-	ft_printf("%d %% %d = %d\n", nbr, 3, q);
-	nbr = update_hash(nbr, 3);
-	ft_printf("q: %d nbr: %d\n", q, nbr);
-	ft_printf("draw_disk: x %d, y %d\n", x, y);
+	int i;
+	int j;
+	int q;
 
-for(int j=-q; j<=q; j++)
+	q = manage_hash(GET, 3) + bonus;
+	j = -q;
+	while (j <= q)
 	{
-		for(int i=-q; i<=q; i++)
+		i = -q;
+		while (i <= q)
 		{
-			if(i*i+j*j <= q * q + q * 0.8f
+			if( i*i + j*j <= q * q + q * 0.8f
 				&& i + y >= 0 && i + y < MAPSIZE
 				&& j + x >= 0 && j + x < MAPSIZE
 				&& map[j + x][i + y] == EMPTY)
 			{
-				// ft_printf("test: draw x: %d, y: %d\n", i + y, j + x);
 				map[j + x][i + y] = map[x][y];
 			}
+			i += 1;
 		}
+		j += 1;
 	}
-
-	return (nbr);
-}
-
-int			draw_mountain(char **map, int x, int y, int nbr)
-{
-	int q =  5;
-	ft_printf("%d %% %d = %d\n", nbr, 3, q);
-	// nbr = update_hash(nbr, 3);
-	ft_printf("q: %d nbr: %d\n", q, nbr);
-	ft_printf("draw_disk: x %d, y %d\n", x, y);
-
-for(int j=-q; j<=q; j++)
-	{
-		for(int i=-q; i<=q; i++)
-		{
-			if(i*i+j*j <= q * q + q * 0.8f
-				&& i + y >= 0 && i + y < MAPSIZE
-				&& j + x >= 0 && j + x < MAPSIZE
-				&& map[j + x][i + y] == EMPTY)
-			{
-				// ft_printf("test: draw x: %d, y: %d\n", i + y, j + x);
-				map[j + x][i + y] = map[x][y];
-			}
-		}
-	}
-
-	return (nbr);
 }
 
 void			change_empty(char **map)
@@ -149,23 +165,29 @@ void		light_on(char **map, int x, int y)
 	map[x][y] = 2;
 }
 
+void		collect_bpoint()
+{
+
+}
+
 char		**new_map(int hash)
 {
 	int		x;
 	int		y;
 	char	**map;
-	size_t	nbr;
 
 	map = create_map();
 
 	manage_biome_list(NEW);
-	manage_biome_list(PRINT);
+	// manage_biome_list(PRINT);
 
-	nbr = hash;
-	ft_printf("nbr-> %d\n", nbr);
-	int wpt = (nbr % 6) + 3;
+
+	manage_hash(SET, hash);
+	manage_hash(PRINT, 0);
+
+
+	int wpt = manage_hash(GET, 6) + 3;
 	ft_printf("wpt-> %d\n", wpt);
-	nbr = update_hash(nbr, 6);
 
 	t_biome_list *ptr;
 
@@ -184,31 +206,27 @@ char		**new_map(int hash)
 			i += 1;
 		}
 
-		int biome_rand = nbr % i;
-		nbr = update_hash(nbr, i);
+		int biome_rand = manage_hash(GET, i);
 
 		tmp = ptr->top;
 		i = biome_rand;
 		while (i--)
 			tmp = tmp->next;
 
-		x = nbr % MAPSIZE;
-		nbr = update_hash(nbr, MAPSIZE);
-		y = nbr % MAPSIZE;
-		nbr = update_hash(nbr, MAPSIZE);
+		x = manage_hash(GET, MAPSIZE);
+		y = manage_hash(GET, MAPSIZE);
 		map[x][y] = tmp->id;
 
-		ft_printf("%s\n", tmp->biome);
+		// ft_printf("%s\n", tmp->biome);
 
 		if (tmp->data == CIRCLE)
-			nbr = draw_disk(map, x, y, nbr);
+			draw_disk(map, x, y, 3);
 		// else if (tmp->data == LINE)
 			// nbr = draw_line(map, x, y, nbr);
 		wpt -= 1;
 	}
 
-	wpt = (nbr % 6) + 3;
-	nbr = update_hash(nbr, 6);
+	wpt = manage_hash(GET, 6) + 6;
 
 	while (wpt)
 	{
@@ -225,13 +243,12 @@ char		**new_map(int hash)
 			tmp = tmp->next;
 		}
 
-		int biome_rand = nbr % i;
-		nbr = update_hash(nbr, i);
+		int biome_rand = manage_hash(GET, i);
 
 		tmp = ptr->top;
 		i = biome_rand;
 
-		ft_printf("ground: %d\n", i);
+		// ft_printf("ground: %d\n", i);
 
 		while (tmp->data != LINE && tmp->data != CIRCLE)
 			tmp = tmp->next;
@@ -243,16 +260,14 @@ char		**new_map(int hash)
 			i -= 1;
 		}
 
-		x = nbr % MAPSIZE;
-		nbr = update_hash(nbr, MAPSIZE);
-		y = nbr % MAPSIZE;
-		nbr = update_hash(nbr, MAPSIZE);
+		x = manage_hash(GET, MAPSIZE);
+		y = manage_hash(GET, MAPSIZE);
 		map[x][y] = tmp->id;
 
-		ft_printf("%s\n", tmp->biome);
+		// ft_printf("%s\n", tmp->biome);
 
 		if (tmp->data == CIRCLE)
-			nbr = draw_disk(map, x, y, nbr);
+			draw_disk(map, x, y, 1);
 		// else if (tmp->data == LINE)
 			// nbr = draw_line(map, x, y, nbr);
 		wpt -= 1;
@@ -263,18 +278,15 @@ char		**new_map(int hash)
 
 	mountains = create_map();
 
-	ft_printf("this is nbr : %d\n", nbr);
-	wpt = (nbr % 6) + 2;
-	nbr = update_hash(nbr, 6);
+	wpt = manage_hash(GET, 3) + 1;
+	ft_printf("this is nbr : %d\n", wpt);
 	while (wpt)
 	{
-		x = nbr % MAPSIZE;
-		nbr = update_hash(nbr, MAPSIZE);
-		y = nbr % MAPSIZE;
-		nbr = update_hash(nbr, MAPSIZE);
+		x = manage_hash(GET, MAPSIZE);
+		y = manage_hash(GET, MAPSIZE);
 		mountains[x][y] = 1;
 
-		nbr = draw_mountain(mountains, x, y, nbr);
+		draw_disk(mountains, x, y, 10);
 
 		wpt -= 1;
 	}
@@ -292,16 +304,51 @@ char		**new_map(int hash)
 
 	change_empty(mountains);
 
-	char character = mountains[o][p];
+	// char character = mountains[o][p];
 	while (o < MAPSIZE)
 	{
 		p = 0;
-		character = mountains[o][p];
+		// character = mountains[0][0];
 		while (p < MAPSIZE)
 		{
-			if (mountains[o][p] != character)
+			// int rand_mountain = manage_hash(GET, 3) + 1;
+
+			// if (rand_mountain == 0)
+			// {
+			// 	if (o + 1 < MAPSIZE && mountains[o][p] != mountains[o + 1][p]
+			// 		&& p + 1 < MAPSIZE && mountains[o][p] != mountains[o][p + 1])
+			// 	map[o][p] = tmp->id;
+			// }
+			// else if (rand_mountain == 1)
+			// {
+			// 	if (o - 1 >= 0 && mountains[o][p] != mountains[o - 1][p]
+			// 		&& p - 1 >= 0 && mountains[o][p] != mountains[o][p - 1])
+			// 	map[o][p] = tmp->id;
+			// }
+			// else if (rand_mountain == 2)
+			// {
+			// 	if (o + 1 < MAPSIZE && mountains[o][p] != mountains[o + 1][p]
+			// 		&& p - 1 >= 0 && mountains[o][p] != mountains[o][p - 1])
+			// 	map[o][p] = tmp->id;
+			// }
+			// else
+			// {
+			// 	if (o - 1 >= 0 && mountains[o][p] != mountains[o - 1][p]
+			// 		&& p + 1 < MAPSIZE && mountains[o][p] != mountains[o][p + 1])
+			// 	map[o][p] = tmp->id;
+			// }
+
+
+			if ((o + 1 < MAPSIZE && mountains[o][p] != mountains[o + 1][p]
+							&& p + 1 < MAPSIZE && mountains[o][p] != mountains[o][p + 1])
+				|| (o - 1 >= 0 && mountains[o][p] != mountains[o - 1][p]
+				&& p - 1 >= 0 && mountains[o][p] != mountains[o][p - 1])
+				|| (o + 1 < MAPSIZE && mountains[o][p] != mountains[o + 1][p]
+					&& p - 1 >= 0 && mountains[o][p] != mountains[o][p - 1])
+				|| (o - 1 >= 0 && mountains[o][p] != mountains[o - 1][p]
+					&& p + 1 < MAPSIZE && mountains[o][p] != mountains[o][p + 1]))
 			{
-				character = mountains[o][p];
+				// character = mountains[o][p];
 				map[o][p] = tmp->id;
 			}
 			p += 1;
@@ -367,15 +414,15 @@ void		print_map(char **map)
 			else if (map[i][j] == 3)
 				ft_printf(" \e[38;5;0mground\e[0m ");
 			else if (map[i][j] == 4)
-				ft_printf(" \e[38;5;70mP\e[0m ");
+				ft_printf(" \e[38;5;112mP\e[0m ");
 			else if (map[i][j] == 5)
 				ft_printf(" \e[38;5;22mF\e[0m ");
 			else if (map[i][j] == 6)
 				ft_printf(" \e[38;5;22mF\e[0m ");
 			else if (map[i][j] == 7)
-				ft_printf(" \e[38;5;100mH\e[0m ");
+				ft_printf(" \e[38;5;94mH\e[0m ");
 			else if (map[i][j] == 8)
-				ft_printf(" \e[38;5;188mM\e[0m ");
+				ft_printf(" \e[38;5;252mM\e[0m ");
 			else if (map[i][j] == 9)
 				ft_printf(" \e[38;5;0mwater\e[0m ");
 			else if (map[i][j] == 10)

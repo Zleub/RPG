@@ -27,7 +27,7 @@ SRC			=	manage_game.c \
 OBJ			= $(subst .c,.o,$(SRC))
 
 CC		= gcc
-CCFLAGS	= -Werror -Wall -Wextra -Wuninitialized -O0 -g -std=c99
+CCFLAGS	= -Werror -Wall -Wextra -Wuninitialized -O3 -g
 
 # LIBFLAGS = -lncurses
 
