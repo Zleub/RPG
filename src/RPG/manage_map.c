@@ -382,9 +382,9 @@ void		print_map(char **map)
 		}
 	}
 
-	char		**manage_map(int macro, int hash)
-	{
-		static char		**map;
+char		**manage_map(int macro, int hash)
+{
+	static char		**map;
 
 	if (macro == GET)
 		return (map);
