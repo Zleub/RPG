@@ -6,14 +6,12 @@
 tool:
 	asprintf
 game:
-	threading printing
 	resize
 characters:
 	jobs
 	stats
 	battle
 	groups
-
 ```
 
 ##Preview
@@ -29,7 +27,6 @@ ID		NAME			ACTIVITY
 01		Bruenor		Managing
 02		Paleo		Hunting
 03		Giujy		Cooking
-
 ```
 ##Notes
 
