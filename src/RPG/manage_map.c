@@ -1,5 +1,4 @@
 #include <RPG.h>
-#include <limits.h>
 
 char		**create_map()
 {
@@ -28,84 +27,12 @@ char		**create_map()
 	return (map);
 }
 
-size_t		update_hash(size_t hash, int diviser)
-{
-	ft_printf("if %d (hash) / %d (diviser) = %d <= 5381\n", hash, diviser, hash /diviser);
-	if (hash / diviser <= 5381)
-	{
-		ft_printf("return %d\n", INT_MAX - hash / diviser);
-		return (INT_MAX - hash / diviser);
-	}
-	else
-		return (hash / diviser);
-}
-
-void		print_hash(int hash)
-{
-	ft_printf("print_hash: %d\n", hash);
-}
-
-int		manage_hash(int macro, int nbr)
-{
-	int				tmp;
-	static int		hash;
-	static int		initial;
-
-	if (macro == GET)
-	{
-		if (hash / nbr <= 5381)
-		{
-			// ft_printf("1.1 %d\n", hash);
-			hash = hash / nbr ^ initial;
-			// ft_printf("1.2 %d\n", hash);
-		}
-		else
-		{
-			// ft_printf("2.1 %d\n", hash / nbr);
-			hash = hash / nbr;
-			// ft_printf("2.2 %d\n", hash / nbr);
-		}
-		tmp = hash % nbr;
-		return (tmp);
-	}
-	else if (macro == SET)
-	{
-		hash = nbr;
-		initial = nbr;
-	}
-	else if (macro == PRINT)
-		print_hash(hash);
-	else
-		ft_printf("useless call to manage_hash\n");
-	return (0);
-}
-
 int		ft_abs(int x)
 {
 	if (x >= 0)
 		return (x);
 	else
 		return (x * -1);
-}
-
-void		print_array(char **map)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (i < MAPSIZE)
-	{
-		j = 0;
-		while (j < MAPSIZE)
-		{
-			ft_printf(" %d", map[i][j]);
-			j += 1;
-		}
-		ft_printf("\n");
-		i += 1;
-	}
-
 }
 
 void			draw_disk(char **map, int x, int y, int bonus)
@@ -165,182 +92,145 @@ void		light_on(char **map, int x, int y)
 	map[x][y] = 2;
 }
 
-void		collect_bpoint()
+t_biome_list	*get_biome_ptr(char *str)
 {
+	t_biome_list	*ptr;
 
+	ptr = manage_biome_list(GET);
+	while (ptr && ft_strcmp(ptr->biome, str))
+		ptr = ptr->next;
+	return (ptr);
 }
 
-char		**new_map(int hash)
+int				count_biome_top(t_biome_list *ptr)
+{
+	int			i;
+
+	i = 0;
+	while (ptr)
+	{
+		ptr = ptr->next;
+		i += 1;
+	}
+	return (i);
+}
+
+void		new_point(t_biome_list *tmp)
 {
 	int		x;
 	int		y;
-	char	**map;
 
-	map = create_map();
+	x = manage_hash(GET, MAPSIZE);
+	y = manage_hash(GET, MAPSIZE);
+	manage_bpoint_list(NEW, create_wintab(x, y, tmp->id, tmp->data));
+}
 
-	manage_biome_list(NEW);
-	// manage_biome_list(PRINT);
+void		collect_wpoint()
+{
+	t_biome_list	*ptr;
+	t_biome_list	*tmp;
+	int				biome_rand;
+	int				i;
 
+	ptr = get_biome_ptr("water");
+	i = count_biome_top(ptr->top);
+	biome_rand = manage_hash(GET, i);
 
-	manage_hash(SET, hash);
-	manage_hash(PRINT, 0);
+	tmp = ptr->top;
+	i = biome_rand;
+	while (i--)
+		tmp = tmp->next;
+	new_point(tmp);
+}
 
-
-	int wpt = manage_hash(GET, 6) + 3;
-	ft_printf("wpt-> %d\n", wpt);
-
-	t_biome_list *ptr;
-
-	while (wpt)
+int		count_gpoint(t_biome_list *ptr)
+{
+	int i = 0;
+	while (ptr)
 	{
-		ptr = manage_biome_list(GET);
-		while (ptr && ft_strcmp(ptr->biome, "water"))
-			ptr = ptr->next;
-
-		int i;
-		t_biome_list *tmp = ptr->top;
-		i = 0;
-		while (tmp)
-		{
-			tmp = tmp->next;
+		if (ptr->data == LINE || ptr->data == CIRCLE)
 			i += 1;
-		}
-
-		int biome_rand = manage_hash(GET, i);
-
-		tmp = ptr->top;
-		i = biome_rand;
-		while (i--)
-			tmp = tmp->next;
-
-		x = manage_hash(GET, MAPSIZE);
-		y = manage_hash(GET, MAPSIZE);
-		map[x][y] = tmp->id;
-
-		// ft_printf("%s\n", tmp->biome);
-
-		if (tmp->data == CIRCLE)
-			draw_disk(map, x, y, 3);
-		// else if (tmp->data == LINE)
-			// nbr = draw_line(map, x, y, nbr);
-		wpt -= 1;
+		ptr = ptr->next;
 	}
+	return (i);
+}
 
-	wpt = manage_hash(GET, 6) + 6;
+void		collect_gpoint()
+{
+	t_biome_list	*ptr;
+	t_biome_list	*tmp;
+	int				i;
+	int				biome_rand;
 
-	while (wpt)
+	ptr = get_biome_ptr("ground");
+	i = count_gpoint(ptr->top);
+	biome_rand = manage_hash(GET, i);
+	tmp = ptr->top;
+	while (tmp->data != LINE && tmp->data != CIRCLE)
+		tmp = tmp->next;
+	while (biome_rand)
 	{
-		ptr = manage_biome_list(GET);
-		while (ptr && ft_strcmp(ptr->biome, "ground"))
-			ptr = ptr->next;
-
-		t_biome_list *tmp = ptr->top;
-		int i = 0;
-		while (tmp)
-		{
-			if (tmp->data == LINE || tmp->data == CIRCLE)
-				i += 1;
-			tmp = tmp->next;
-		}
-
-		int biome_rand = manage_hash(GET, i);
-
-		tmp = ptr->top;
-		i = biome_rand;
-
-		// ft_printf("ground: %d\n", i);
-
 		while (tmp->data != LINE && tmp->data != CIRCLE)
 			tmp = tmp->next;
-		while (i)
-		{
-			while (tmp->data != LINE && tmp->data != CIRCLE)
-				tmp = tmp->next;
-			tmp = tmp->next;
-			i -= 1;
-		}
-
-		x = manage_hash(GET, MAPSIZE);
-		y = manage_hash(GET, MAPSIZE);
-		map[x][y] = tmp->id;
-
-		// ft_printf("%s\n", tmp->biome);
-
-		if (tmp->data == CIRCLE)
-			draw_disk(map, x, y, 1);
-		// else if (tmp->data == LINE)
-			// nbr = draw_line(map, x, y, nbr);
-		wpt -= 1;
-
+		tmp = tmp->next;
+		biome_rand -= 1;
 	}
+	new_point(tmp);
+}
 
-	char **mountains;
+void		collect_bpoint()
+{
+	int				wpt;
+
+	wpt = manage_hash(GET, 6) + MAPSIZE / 10;
+	while (wpt)
+	{
+		collect_wpoint();
+		wpt -= 1;
+	}
+	wpt = manage_hash(GET, 6) + MAPSIZE / 5;
+	while (wpt)
+	{
+		collect_gpoint();
+		wpt -= 1;
+	}
+}
+
+char		**create_mountains(void)
+{
+	int		x;
+	int		y;
+	int		wpt;
+	char	**mountains;
 
 	mountains = create_map();
-
-	wpt = manage_hash(GET, 3) + 1;
-	ft_printf("this is nbr : %d\n", wpt);
+	wpt = manage_hash(GET, 3) + MAPSIZE / 5;
 	while (wpt)
 	{
 		x = manage_hash(GET, MAPSIZE);
 		y = manage_hash(GET, MAPSIZE);
 		mountains[x][y] = 1;
 
-		draw_disk(mountains, x, y, 10);
-
+		draw_disk(mountains, x, y, MAPSIZE / 3);
 		wpt -= 1;
 	}
+	return (mountains);
+}
 
-	int o = 0;
-	int p = 0;
+void		write_mountains(char **map, char **mountains, int biome_id)
+{
+	int		o;
+	int		p;
 
-	ptr = manage_biome_list(GET);
-	while (ptr && ft_strcmp(ptr->biome, "ground"))
-		ptr = ptr->next;
-
-	t_biome_list *tmp = ptr->top;
-	while (ft_strcmp(tmp->biome, "Mountain"))
-		tmp = tmp->next;
-
-	change_empty(mountains);
-
-	// char character = mountains[o][p];
+	o = 0;
+	p = 0;
 	while (o < MAPSIZE)
 	{
 		p = 0;
-		// character = mountains[0][0];
 		while (p < MAPSIZE)
 		{
-			// int rand_mountain = manage_hash(GET, 3) + 1;
-
-			// if (rand_mountain == 0)
-			// {
-			// 	if (o + 1 < MAPSIZE && mountains[o][p] != mountains[o + 1][p]
-			// 		&& p + 1 < MAPSIZE && mountains[o][p] != mountains[o][p + 1])
-			// 	map[o][p] = tmp->id;
-			// }
-			// else if (rand_mountain == 1)
-			// {
-			// 	if (o - 1 >= 0 && mountains[o][p] != mountains[o - 1][p]
-			// 		&& p - 1 >= 0 && mountains[o][p] != mountains[o][p - 1])
-			// 	map[o][p] = tmp->id;
-			// }
-			// else if (rand_mountain == 2)
-			// {
-			// 	if (o + 1 < MAPSIZE && mountains[o][p] != mountains[o + 1][p]
-			// 		&& p - 1 >= 0 && mountains[o][p] != mountains[o][p - 1])
-			// 	map[o][p] = tmp->id;
-			// }
-			// else
-			// {
-			// 	if (o - 1 >= 0 && mountains[o][p] != mountains[o - 1][p]
-			// 		&& p + 1 < MAPSIZE && mountains[o][p] != mountains[o][p + 1])
-			// 	map[o][p] = tmp->id;
-			// }
-
-
 			if ((o + 1 < MAPSIZE && mountains[o][p] != mountains[o + 1][p]
-							&& p + 1 < MAPSIZE && mountains[o][p] != mountains[o][p + 1])
+					&& p + 1 < MAPSIZE && mountains[o][p] != mountains[o][p + 1])
 				|| (o - 1 >= 0 && mountains[o][p] != mountains[o - 1][p]
 				&& p - 1 >= 0 && mountains[o][p] != mountains[o][p - 1])
 				|| (o + 1 < MAPSIZE && mountains[o][p] != mountains[o + 1][p]
@@ -348,28 +238,46 @@ char		**new_map(int hash)
 				|| (o - 1 >= 0 && mountains[o][p] != mountains[o - 1][p]
 					&& p + 1 < MAPSIZE && mountains[o][p] != mountains[o][p + 1]))
 			{
-				// character = mountains[o][p];
-				map[o][p] = tmp->id;
+				map[o][p] = biome_id;
 			}
 			p += 1;
 		}
 		o += 1;
 	}
+}
 
-	print_array(mountains);
+void		draw_mountains(char **map)
+{
+	t_biome_list	*tmp;
+	t_biome_list	*ptr;
+	char			**mountains;
 
+	mountains = create_mountains();
 
-	ptr = manage_biome_list(GET);
-	while (ptr && ft_strcmp(ptr->biome, "ground"))
-		ptr = ptr->next;
+	ptr = get_biome_ptr("ground");
 
+	tmp = ptr->top;
+	while (ft_strcmp(tmp->biome, "Mountain"))
+		tmp = tmp->next;
+
+	change_empty(mountains);
+	write_mountains(map, mountains, tmp->id);
+}
+
+void		fill_map(char **map)
+{
+	int				a;
+	int				b;
+	t_biome_list	*ptr;
+	t_biome_list	*tmp;
+
+	ptr = get_biome_ptr("ground");
 
 	tmp = ptr->top;
 	while (tmp->data != FILL)
 		tmp = tmp->next;
 
-	int a = 0;
-	int b = 0;
+	a = 0;
 	while (a < MAPSIZE)
 	{
 		b = 0;
@@ -382,6 +290,43 @@ char		**new_map(int hash)
 		a += 1;
 	}
 
+}
+
+void		draw_bpoint(char **map)
+{
+	t_bpoint_list	*ptr;
+
+	ptr = manage_bpoint_list(GET, NULL);
+	while (ptr)
+	{
+		map[ptr->x][ptr->y] = ptr->id;
+		if (ptr->type == CIRCLE)
+		{
+			if (ptr->id < 10) //Ground
+				draw_disk(map, ptr->x, ptr->y, 3);
+			else
+				draw_disk(map, ptr->x, ptr->y, 1);
+		}
+		ptr = ptr->next;
+	}
+}
+
+char		**new_map(int hash)
+{
+	char	**map;
+
+	map = create_map();
+
+	manage_biome_list(NEW);
+
+	manage_hash(SET, hash);
+	manage_hash(PRINT, 0);
+
+	collect_bpoint();
+
+	draw_mountains(map);
+	draw_bpoint(map);
+	fill_map(map);
 	map[MAPSIZE / 2][MAPSIZE / 2] = 1;
 
 	return (map);

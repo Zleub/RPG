@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/04 21:27:56 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/05 19:47:42 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include <stdio.h>
 
 #define DEBUG 1
-#define MAPSIZE 30
+#define MAPSIZE 15
 #define STRING char*
 
 typedef struct				s_calendar_list
@@ -39,6 +39,15 @@ typedef struct				s_biome_list
 	struct s_biome_list		*top;
 	int						id;
 }							t_biome_list;
+
+typedef struct				s_bpoint_list
+{
+	int						x;
+	int						y;
+	int						id;
+	int						type;
+	struct s_bpoint_list	*next;
+}							t_bpoint_list;
 
 typedef struct			s_heros
 {
@@ -131,5 +140,15 @@ char			**manage_map(int macro, int hash);
 ** manage_biome_list.c
 */
 t_biome_list		*manage_biome_list(int macro);
+
+/*
+** manage_bpoint_list.c
+*/
+t_bpoint_list	*manage_bpoint_list(int macro, WINTAB *array);
+
+/*
+** manage_hash.c
+*/
+int		manage_hash(int macro, int nbr);
 
 #endif

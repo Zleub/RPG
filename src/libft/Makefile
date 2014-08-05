@@ -32,7 +32,8 @@ SRC			=	ft_memset.c				ft_bzero.c			ft_memcpy.c		\
 				ft_putchar.c			ft_putstr.c			ft_putendl.c	\
 				ft_putnbr.c				ft_putchar_fd.c		ft_putstr_fd.c	\
 				ft_putnbr_fd.c			ft_putendl_fd.c		all_free.c		\
-				ft_strndup.c			ft_strclen.c		gnl.c
+				ft_strndup.c			ft_strclen.c		ft_print_array.c\
+				gnl.c
 
 OBJ			= $(subst .c,.o,$(SRC))
 
