@@ -33,7 +33,7 @@ SRC			=	ft_memset.c				ft_bzero.c			ft_memcpy.c		\
 				ft_putnbr.c				ft_putchar_fd.c		ft_putstr_fd.c	\
 				ft_putnbr_fd.c			ft_putendl_fd.c		all_free.c		\
 				ft_strndup.c			ft_strclen.c		ft_print_array.c\
-				gnl.c
+				ft_abs.c				gnl.c
 
 OBJ			= $(subst .c,.o,$(SRC))
 
@@ -45,9 +45,11 @@ all: $(NAME)
 $(NAME):	$(OBJ)
 			@ar rc $@ $^
 			@ranlib $@
+			@echo '!'
 			@echo "\033[32m•\033[0m Libft compil: \033[32m$(NAME)\033[0m"
 
 %.o:		%.c
+			@echo '.''\c'
 			@$(CC) $(CCFLAGS) -I $(HEADDIR) -o $@ -c $<
 
 clean:

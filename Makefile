@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+         #
+#    By: adebray <adebray@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/16 14:40:42 by adebray           #+#    #+#              #
-#    Updated: 2014/07/20 12:40:15 by Arno             ###   ########.fr        #
+#    Updated: 2014/08/05 21:22:28 by adebray          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME		=	RPG
@@ -42,6 +42,7 @@ makelib: libft printf libcurse librpg
 
 $(NAME): makelib $(OBJ)
 	@$(CC) $(CCFLAGS) $(HEADFLAG) $(LIBFLAG) -o $(NAME) $(OBJ)
+	@echo '!'
 	@echo "\033[32m•\033[0m $(NAME) compil: \033[32m$(NAME)\033[0m"
 
 libft: ./inc/libft.h
@@ -57,6 +58,7 @@ librpg: ./inc/RPG.h
 	@make -C ./src/RPG
 
 %.o: %.c ./inc/RPG.h
+	@echo '.''\c'
 	@$(CC) $(CCFLAGS) $(HEADFLAG) -o $@ -c $<
 
 clean:

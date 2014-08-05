@@ -14,8 +14,10 @@ NAME		=	libRPG.a
 LIB			=	ft
 HEADDIR		=	 ../../inc
 
-SRC			=	game_menu.c \
+SRC			=	game_event.c \
+				game_menu.c \
 				game_new.c \
+				game_print.c \
 				manage_biome_list.c \
 				manage_bpoint_list.c \
 				manage_calendar.c \
@@ -24,6 +26,10 @@ SRC			=	game_menu.c \
 				manage_game.c \
 				manage_hash.c \
 				manage_map.c \
+				map_draw.c \
+				map_mountains.c \
+				map_point.c \
+				map_point_utility.c \
 				signal.c
 
 OBJ			= $(subst .c,.o,$(SRC))
@@ -38,9 +44,11 @@ all: $(NAME)
 $(NAME):	$(OBJ)
 			@ar rc $@ $^
 			@ranlib $@
+			@echo '!'
 			@echo "\033[32m•\033[0m RPG compil: \033[32m$(NAME)\033[0m"
 
 %.o:		%.c $(HEADDIR)/RPG.h
+			@echo '.''\c'
 			@$(CC) $(CCFLAGS) -I $(HEADDIR) -o $@ -c $<
 
 clean:

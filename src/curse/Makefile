@@ -30,9 +30,11 @@ all: $(NAME)
 $(NAME):	$(OBJ)
 			@ar rc $@ $^
 			@ranlib $@
+			@echo '!'
 			@echo "\033[32m•\033[0m Curse compil: \033[32m$(NAME)\033[0m"
 
 %.o:		%.c
+			@echo '.''\c'
 			@$(CC) $(CCFLAGS) -I $(HEADDIR) -o $@ -c $<
 
 clean:

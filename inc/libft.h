@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/30 00:03:36 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/05 13:35:57 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/05 20:51:15 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct		s_read
 	struct s_read	*next;
 }					t_read;
 
+int					ft_abs(int x);
 void				print_array(char **map, int size);
 int					get_next_line(int const fd, char **line);
 void				all_free(int nb, ...);

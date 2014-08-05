@@ -6,7 +6,7 @@
 #    By: adebray <adebray@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/23 04:54:36 by adebray           #+#    #+#              #
-#    Updated: 2014/08/04 12:58:06 by adebray          ###   ########.fr        #
+#    Updated: 2014/08/05 21:21:15 by adebray          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@ar rc $@ $^
 	@ranlib $@
+	@echo '!'
 	@echo "\033[32m•\033[0m Printf compil: \033[32m$(NAME)\033[0m"
 
 clean:
@@ -46,6 +47,7 @@ clean:
 	@echo "\033[31m•\033[0m printf clean.\033[0m"
 
 %.o: %.c
+	@echo '.''\c'
 	@$(CC) $(CCFLAGS) $(HEADFLAG) -o $@ -c $<
 
 fclean: clean
