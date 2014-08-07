@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/05 21:18:17 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/07 12:31:26 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ typedef struct				s_biome_list
 	struct s_biome_list		*top;
 	int						id;
 }							t_biome_list;
+
+typedef struct				s_biome_conf
+{
+	char					*biome;
+	short					red;
+	short					green;
+	short					blue;
+	char					character;
+	struct s_biome_conf		*next;
+}							t_biome_conf;
 
 typedef struct				s_bpoint_list
 {
@@ -77,6 +87,8 @@ typedef struct				s_gameplay
 	int						status;
 	int						count;
 	int						select;
+	int						run_menu;
+	int						run_map;
 }							t_gameplay;
 
 enum						e_content
@@ -164,6 +176,7 @@ t_bpoint_list				*manage_bpoint_list(int macro, WINTAB *array);
 ** manage_hash.c
 */
 int							manage_hash(int macro, int nbr);
+int							ft_hash(char *line);
 
 /*
 ** map_point.c

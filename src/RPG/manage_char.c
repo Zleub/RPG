@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 11:55:49 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/31 23:41:11 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/07 11:27:47 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,20 +109,6 @@ t_heros				*create_heros(void)
 // 	}
 // 	return (new);
 // }
-
-int					ft_hash(char *line)
-{
-	int				hash;
-	int				c;
-
-	hash = 5381;
-	while ((c = *line++))
-		hash = ((hash << 5) + hash) ^ c;
-	if (hash < 0)
-		return (hash * -1);
-	else
-		return (hash);
-}
 
 t_heros				*new_char(STRING str)
 {

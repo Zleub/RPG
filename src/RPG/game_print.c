@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/08/05 21:14:55 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/05 21:15:22 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/07 11:41:04 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,49 @@ void			print_menu(WINDOW *menu)
 	}
 }
 
+void			print_main_window(WINDOW *win, char **map)
+{
+	int			i;
+	int			j;
+
+	i = 0;
+	(void)map;
+	while (i < MAPSIZE)
+	{
+		j = 0;
+		while (j < MAPSIZE)
+		{
+			mvwprintw(win, i + 2, j * 3 + 4, " %c ", map[i][j] + '0' - 1);
+			j += 1;
+		}
+		i += 1;
+	}
+}
+
 void			print_main(WINDOW *win)
 {
 	t_heros_list	*head;
 	t_heros			*heros;
+	char			**map;
 	int				cmp;
 
 	cmp = 5;
-	mvwprintw(win, cmp - 2, 5, "%5s %10s %10s %10s %5s/%s", "id", "name", "level", "activity", "xp", "xp to lvl"); // PRINT EVERY HEROS
-	head = manage_heros_list(GET, NULL);
-	while (head)
+	if (manage_game(GET)->run_map == 0)
 	{
-		heros = head->heros;
-		mvwprintw(win, cmp, 5, "%5d %10s %10d %-10s | %d/%d", heros->id, heros->name, heros->level, heros->state->event, heros->experience, heros->level * 10); // PRINT EVERY HEROS
-		tick_heros(head->heros); // PLAY EVERY HEROS
-		head = head->next;
-		cmp += 1;
+		mvwprintw(win, cmp - 2, 5, "%5s %10s %10s %10s %5s/%s", "id", "name", "level", "activity", "xp", "xp to lvl"); // PRINT EVERY HEROS
+		head = manage_heros_list(GET, NULL);
+		while (head)
+		{
+			heros = head->heros;
+			mvwprintw(win, cmp, 5, "%5d %10s %10d %-10s | %d/%d", heros->id, heros->name, heros->level, heros->state->event, heros->experience, heros->level * 10); // PRINT EVERY HEROS
+			tick_heros(head->heros); // PLAY EVERY HEROS
+			head = head->next;
+			cmp += 1;
+		}
+	}
+	else
+	{
+		map = manage_map(GET, 0);
+		print_main_window(win, map);
 	}
 }

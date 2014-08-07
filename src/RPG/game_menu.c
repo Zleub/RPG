@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/25 02:54:22 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/29 13:52:10 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/07 11:25:40 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void			get_name(WINDOW *win)
 			// {
 				// manage_ char(SET, heros);
 				new_char(str);
+				manage_map(NEW, ft_hash(str));
 				// manage_heros_list(ADD, heros);
 				// CREATE A NEW GAME
 			// }

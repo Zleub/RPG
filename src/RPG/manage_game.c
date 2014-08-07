@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/08/04 03:21:53 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/05 21:16:14 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/07 11:11:13 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,20 @@ void			get_key(int fd)
 				manage_game(GET)->select = 0;
 			dprintf(fd, "test : %d\n", manage_game(GET)->select);
 		}
+		else if (key == 9)
+		{
+			if (manage_game(GET)->run_menu == 1)
+				manage_game(GET)->run_menu = 0;
+			else
+				manage_game(GET)->run_menu = 1;
+		}
+		else if (key == 109)
+		{
+			if (manage_game(GET)->run_map == 1)
+				manage_game(GET)->run_map = 0;
+			else
+				manage_game(GET)->run_map = 1;
+		}
 		while ((key = getch()) != EOF && key != '\n')
 		{
 			;
@@ -71,12 +85,17 @@ void			game_run()
 
 		get_key(fd);
 
-		menu = manage_win(NEW_B, create_wintab(LINES, COLS / 4, 0, COLS - COLS / 4));
-		win = manage_win(NEW_B, create_wintab(LINES, COLS - COLS / 4, 0, 0));
+		if (manage_game(GET)->run_menu == 1)
+			win = manage_win(NEW_B, create_wintab(LINES, COLS, 0, 0));
+		else
+		{
+			win = manage_win(NEW_B, create_wintab(LINES, COLS - COLS / 4, 0, 0));
+			menu = manage_win(NEW_B, create_wintab(LINES, COLS / 4, 0, COLS - COLS / 4));
+			print_menu(menu);
+			wrefresh(menu); // WRITE TEXT ON SCREEN
+		}
 		print_main(win);
-		print_menu(menu);
 		wrefresh(win); // WRITE TEXT ON SCREEN
-		wrefresh(menu); // WRITE TEXT ON SCREEN
 		usleep(100 * 800);
 	}
 	close(fd);

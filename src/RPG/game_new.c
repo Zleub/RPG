@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/25 02:49:04 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/31 23:41:52 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/07 11:07:15 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_gameplay	*create_game(void)
 	new->status = -1;
 	new->select = -1;
 	new->count = -1;
+	new->run_menu = -1;
+	new->run_map = -1;
 	return (new);
 }
 
@@ -31,6 +33,8 @@ t_gameplay		*game_new(t_gameplay *game)
 		game->status = MENU;
 		game->count = 0;
 		game->select = 0;
+		game->run_menu = 0;
+		game->run_map = 0;
 		ft_signal();
 		manage_ncurses(NEW);
 		manage_calendar(NEW);
