@@ -1,1 +1,7 @@
-biome_conf
+Wilderness {1, 0, 0, W}
+Plains {112, 0, 0, P}
+Forest {22, 0, 0, F}
+Hill {94, 0, 0, H}
+Mountain {252, 0, 0, M}
+Lac {44, 0, 0, L}
+River {25, 0, 0, R}

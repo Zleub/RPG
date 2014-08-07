@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/08/04 03:21:53 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/07 11:11:13 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/07 19:05:39 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void		tick_heros(t_heros *heros) // GAME MECHANISM EXAMPLE ??
 {
 	if (manage_game(GET)->count == 1)
 		event_vendredi(heros);
+	else
+		event_rand_char(heros);
 
 	event_calendar(heros);
 	heros->ticks += 1;

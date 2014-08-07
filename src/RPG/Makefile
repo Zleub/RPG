@@ -18,6 +18,7 @@ SRC			=	game_event.c \
 				game_menu.c \
 				game_new.c \
 				game_print.c \
+				manage_biome_conf.c \
 				manage_biome_list.c \
 				manage_bpoint_list.c \
 				manage_calendar.c \

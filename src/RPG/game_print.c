@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/08/05 21:14:55 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/07 11:41:04 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/07 18:50:53 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,27 @@ void			print_menu(WINDOW *menu)
 
 void			print_main_window(WINDOW *win, char **map)
 {
-	int			i;
-	int			j;
+	int				i;
+	int				j;
+	t_biome_conf	*head;
 
 	i = 0;
-	(void)map;
+	start_color();
 	while (i < MAPSIZE)
 	{
 		j = 0;
 		while (j < MAPSIZE)
 		{
-			mvwprintw(win, i + 2, j * 3 + 4, " %c ", map[i][j] + '0' - 1);
+			head = manage_biome_conf(GET);
+			while (head && map[i][j] != head->id)
+				head = head->next;
+			if (head)
+			{
+				init_pair(head->id, head->color, COLOR_BLACK);
+				wattrset(win, COLOR_PAIR(head->id));
+				mvwprintw(win, i + LINES / 4, j * 3 + COLS / 8, " %c ", head->character);
+				wattroff(win, COLOR_PAIR(head->id));
+			}
 			j += 1;
 		}
 		i += 1;
@@ -83,6 +93,13 @@ void			print_main(WINDOW *win)
 	}
 	else
 	{
+		head = manage_heros_list(GET, NULL);
+		while (head)
+		{
+			heros = head->heros;
+			tick_heros(head->heros); // PLAY EVERY HEROS
+			head = head->next;
+		}
 		map = manage_map(GET, 0);
 		print_main_window(win, map);
 	}

@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/08/05 12:01:04 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/05 21:11:39 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/07 13:25:23 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char		**new_map(int hash)
 	map = create_map();
 
 	manage_biome_list(NEW);
+	manage_biome_conf(NEW);
 
 	manage_hash(SET, hash);
 	manage_hash(PRINT, 0);

@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/07 12:31:26 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/07 19:11:16 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,8 @@ typedef struct				s_biome_list
 typedef struct				s_biome_conf
 {
 	char					*biome;
-	short					red;
-	short					green;
-	short					blue;
+	int						id;
+	short					color;
 	char					character;
 	struct s_biome_conf		*next;
 }							t_biome_conf;
@@ -140,6 +139,7 @@ void						game_menu(t_gameplay *game);
 */
 void						event_vendredi(t_heros *heros);
 void						event_calendar(t_heros *heros);
+void						event_rand_char(t_heros *heros);
 
 /*
 ** game_print.c
@@ -204,5 +204,10 @@ void						write_mountains(char **map, char **mountains, int biome_id);
 char						**create_mountains(void);
 void						change_empty(char **map);
 void						draw_mountains(char **map);
+
+/*
+** manage_biome_conf.c
+*/
+t_biome_conf				*manage_biome_conf(int macro);
 
 #endif
