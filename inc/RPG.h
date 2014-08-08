@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPG.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/07 19:11:16 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/08 21:45:24 by Arno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,14 @@ typedef struct				s_heros
 	char					*location;
 	int						level;
 	int						experience;
-	int						strengh;
-	int						armor;
+	int						strength;
+	int						stamina;
+	int						agility;
+	int						dexterity;
+	int						intelligence;
+	int						charisma;
+	int						wisdom;
+	int						will;
 	int						life;
 	int						id;
 	int						cmp;

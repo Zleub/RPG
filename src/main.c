@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 14:52:25 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/07 18:57:29 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/08 21:47:22 by Arno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,8 @@ int					main(int argc, char **argv)
 	endwin();
 	delwin(manage_ncurses(GET));
 
+
+	// manage_map(NEW, ft_hash(argv[1]));
+	// manage_map(PRINT, 0);
 	return (0);
 }

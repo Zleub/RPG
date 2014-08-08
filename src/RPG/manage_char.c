@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_char.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 11:55:49 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/07 11:27:47 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/08 21:16:48 by Arno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,16 @@ t_heros				*create_heros(void)
 	new->location = NULL;
 	new->level = -1;
 	new->experience = -1;
-	new->strengh = -1;
-	new->armor = -1;
+
+	new->strength = -1;
+	new->stamina = -1;
+	new->agility = -1;
+	new->dexterity = -1;
+	new->intelligence = -1;
+	new->charisma = -1;
+	new->wisdom = -1;
+	new->will = -1;
+
 	new->life = -1;
 	new->id = -1;
 	new->cmp = -1;
@@ -122,8 +130,14 @@ t_heros				*new_char(STRING str)
 	new->location = "Wilderness";
 	new->experience = 0;
 	new->level = 0;
-	new->armor = 0;
-	new->strengh = hash % 21;
+	new->strength = 0;
+	new->stamina = 0;
+	new->agility = 0;
+	new->dexterity = 0;
+	new->intelligence = 0;
+	new->charisma = 0;
+	new->wisdom = 0;
+	new->will = 0;
 	new->life = 20;
 	new->id = cmp;
 	new->cmp = 0;

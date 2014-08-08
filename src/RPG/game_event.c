@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_event.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/08/05 21:12:19 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/07 19:33:30 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/08 14:03:59 by Arno             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,17 @@ void		event_rand_char(t_heros *heros)
 	tmp = 0;
 	if (heros->level >= 10 && !ft_strcmp(heros->state->event, "spare"))
 	{
-		dprintf(2, "Rand_char(%d): %d %% 100 : %d\n", check, tmp, tmp % 100);
 		tmp = (int)time(NULL);
+		dprintf(2, "Rand_char(%d): %d %% 100 : %d\n", check, tmp, tmp % 100);
 		if ((tmp % 100) == 0 && check == 0)
 		{
+			dprintf(2, "Rand_char\n");
 			manage_char(NEW, ft_itoa(tmp));
 			check = 1;
 		}
 		else if ((tmp % 100) == 25 && check == 1)
 		{
+			dprintf(2, "Check == 0\n");
 			check = 0;
 		}
 		else

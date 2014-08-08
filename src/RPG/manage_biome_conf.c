@@ -17,11 +17,11 @@ void				print_biome_conf(t_biome_conf *ptr)
 {
 	if (ptr)
 	{
-		ft_printf("\nprint_biome_conf: \n");
-		ft_printf("ptr->biome: %s\n", ptr->biome);
-		ft_printf("ptr->id: %d\n", ptr->id);
-		ft_printf("ptr->color: %d\n", ptr->color);
-		ft_printf("ptr->character: %c\n", ptr->character);
+		dprintf(2, "\nprint_biome_conf: \n");
+		dprintf(2, "ptr->biome: %s\n", ptr->biome);
+		dprintf(2, "ptr->id: %d\n", ptr->id);
+		dprintf(2, "ptr->color: %d\n", ptr->color);
+		dprintf(2, "ptr->character: %c\n", ptr->character);
 		print_biome_conf(ptr->next);
 	}
 }
