@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_event.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/08/05 21:12:19 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/08 14:03:59 by Arno             ###   ########.fr       */
+/*   Updated: 2014/08/09 17:29:49 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,14 @@
 
 void		event_vendredi(t_heros *heros)
 {
-	static int tmp;
+	int		tmp;
 
-	if (heros->level >= 5)
+	if (heros->level >= 2)
 	{
-		dprintf(2, "Vendredi: %d %% 100 : %d\n", tmp, tmp % 100);
-		if (!tmp || tmp < 100)
-			tmp = (int)time(NULL);
-		else if ((tmp % 100) == 0)
+		tmp = update_char_hash(heros, 100);
+		dprintf(2, "Vendredi: %d\n", tmp);
+		if (tmp == 0)
 			manage_char(NEW, "Vendredi");
-		else
-			tmp /= 10;
 	}
 }
 

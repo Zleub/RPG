@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/09 07:30:25 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/09 17:27:00 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct				s_heros
 	char					*name;
 	char					*location;
 	int						level;
+	int						initial_hash;
+	int						hash;
 	int						experience;
 	int						strength;
 	int						stamina;
@@ -135,7 +137,7 @@ enum						e_biome_enum
 */
 t_heros						*new_char(STRING str);
 t_heros						*manage_char(int macro, STRING name);
-
+int							update_char_hash(t_heros *elem, int diviser);
 
 /*
 ** manage_game.c

@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 11:55:49 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/09 01:49:10 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/09 17:43:10 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_heros				*create_heros(void)
 	new->location = NULL;
 	new->level = -1;
 	new->experience = -1;
+	new->initial_hash = -1;
+	new->hash = -1;
 
 	new->strength = -1;
 	new->stamina = -1;
@@ -118,6 +120,18 @@ t_heros				*create_heros(void)
 // 	return (new);
 // }
 
+int					update_char_hash(t_heros *elem, int diviser)
+{
+	int				tmp;
+
+	tmp = elem->hash % diviser;
+	if (elem->hash / diviser <= 5381)
+		elem->hash = elem->hash / diviser ^ ;
+	else
+		elem->hash = elem->hash / diviser;
+	return (tmp);
+}
+
 t_heros				*new_char(STRING str)
 {
 	t_heros			*new;
@@ -126,6 +140,8 @@ t_heros				*new_char(STRING str)
 	new = create_heros();
 	new->name = ft_strdup(str);
 	new->location = "Wilderness";
+	new->initial_hash = ft_hash(str);
+	new->hash = ft_hash(str);
 	new->experience = 0;
 	new->level = 0;
 	new->strength = 0;

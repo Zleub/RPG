@@ -15,14 +15,6 @@ int					ft_hash(char *line)
 		return (hash);
 }
 
-size_t		update_hash(size_t hash, int diviser)
-{
-	if (hash / diviser <= 5381)
-		return (INT_MAX - hash / diviser);
-	else
-		return (hash / diviser);
-}
-
 void		print_hash(int hash)
 {
 	ft_printf("print_hash: %d\n", hash);
@@ -36,11 +28,11 @@ int		manage_hash(int macro, int nbr)
 
 	if (macro == GET)
 	{
+		tmp = hash % nbr;
 		if (hash / nbr <= 5381)
-			hash = hash / nbr ^ initial;
+			hash = (hash / nbr) ^ inital;
 		else
 			hash = hash / nbr;
-		tmp = hash % nbr;
 		return (tmp);
 	}
 	else if (macro == SET)
