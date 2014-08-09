@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_char.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 11:55:49 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/08 21:16:48 by Arno             ###   ########.fr       */
+/*   Updated: 2014/08/09 01:49:10 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +121,9 @@ t_heros				*create_heros(void)
 t_heros				*new_char(STRING str)
 {
 	t_heros			*new;
-	int				hash;
 	static int		cmp;
 
 	new = create_heros();
-	hash = ft_hash(str);
 	new->name = ft_strdup(str);
 	new->location = "Wilderness";
 	new->experience = 0;

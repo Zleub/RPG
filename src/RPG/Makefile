@@ -26,6 +26,8 @@ SRC			=	game_event.c \
 				manage_char_list.c \
 				manage_game.c \
 				manage_hash.c \
+				manage_job.c \
+				manage_job_list.c \
 				manage_map.c \
 				map_draw.c \
 				map_mountains.c \
@@ -37,8 +39,6 @@ OBJ			= $(subst .c,.o,$(SRC))
 
 CC		= gcc
 CCFLAGS	= -Werror -Wall -Wextra -Wuninitialized -O3 -g
-
-# LIBFLAGS = -lncurses
 
 all: $(NAME)
 

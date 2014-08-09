@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/08/05 21:01:09 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/05 21:05:27 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/09 06:51:46 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void			change_empty(char **map)
 
 void		draw_mountains(char **map)
 {
-	t_biome_list	*tmp;
-	t_biome_list	*ptr;
+	t_biome_tree	*tmp;
+	t_biome_tree	*ptr;
 	char			**mountains;
 
 	mountains = create_mountains();

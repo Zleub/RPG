@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/08/05 20:55:40 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/05 20:57:02 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/09 06:52:22 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void		draw_bpoint(char **map)
 	}
 }
 
-int		count_gpoint(t_biome_list *ptr)
+int		count_gpoint(t_biome_tree *ptr)
 {
 	int i = 0;
 	while (ptr)
@@ -43,9 +43,9 @@ int		count_gpoint(t_biome_list *ptr)
 	return (i);
 }
 
-t_biome_list	*get_biome_ptr(char *str)
+t_biome_tree	*get_biome_ptr(char *str)
 {
-	t_biome_list	*ptr;
+	t_biome_tree	*ptr;
 
 	ptr = manage_biome_list(GET);
 	while (ptr && ft_strcmp(ptr->biome, str))
@@ -53,7 +53,7 @@ t_biome_list	*get_biome_ptr(char *str)
 	return (ptr);
 }
 
-int				count_biome_top(t_biome_list *ptr)
+int				count_biome_top(t_biome_tree *ptr)
 {
 	int			i;
 

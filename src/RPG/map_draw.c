@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/08/05 20:59:38 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/05 21:06:34 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/09 06:51:24 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void		fill_map(char **map)
 {
 	int				a;
 	int				b;
-	t_biome_list	*ptr;
-	t_biome_list	*tmp;
+	t_biome_tree	*ptr;
+	t_biome_tree	*tmp;
 
 	ptr = get_biome_ptr("ground");
 

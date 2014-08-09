@@ -6,18 +6,18 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/08/04 03:21:53 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/07 13:31:56 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/09 06:51:01 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <RPG.h>
 
-t_biome_list		*create_biome_list(void)
+t_biome_tree		*create_biome_list(void)
 {
-	t_biome_list	*new;
+	t_biome_tree	*new;
 	static int		cmp;
 
-	if (!(new = (t_biome_list*)malloc(sizeof(t_biome_list))))
+	if (!(new = (t_biome_tree*)malloc(sizeof(t_biome_tree))))
 		return (NULL);
 	new->biome = NULL;
 	new->data = -1;
@@ -37,16 +37,38 @@ void				print_tab(int nbr)
 	}
 }
 
-void				print_biome_list(t_biome_list *head, int level)
+void				print_biome_tree(t_biome_tree *head, int level)
 {
 	if (!head)
 		return ;
 	// print_tab(level);
-	// ft_printf("print_biome_list %d\n", level);
+	// ft_printf("print_biome_tree %d\n", level);
 	print_tab(level);
 	ft_printf("%s: %d\n", head->biome, head->data);
-	print_biome_list(head->top, level + 1);
-	print_biome_list(head->next, level);
+	print_biome_tree(head->top, level + 1);
+	print_biome_tree(head->next, level);
+}
+
+void				print_error_tab(int nbr)
+{
+	while (nbr)
+	{
+		dprintf(2, "\t");
+		nbr--;
+	}
+}
+
+void				print_error_biome_list(t_biome_tree *head, int level)
+{
+	if (!head)
+		return ;
+
+	// print_tab(level);
+	// ft_printf("print_biome_tree %d\n", level);
+	print_error_tab(level);
+	dprintf(2, "%s: %d\n", head->biome, head->data);
+	print_error_biome_list(head->top, level + 1);
+	print_error_biome_list(head->next, level);
 }
 
 int						get_lvl(char *line)
@@ -102,7 +124,7 @@ int					ft_check(char *line)
 	return (-1);
 }
 
-void					insert_next_line(t_biome_list *head, char *line)
+void					insert_next_line(t_biome_tree *head, char *line)
 {
 	int				i;
 
@@ -132,9 +154,9 @@ void					insert_next_line(t_biome_list *head, char *line)
 	}
 }
 
-t_biome_list			*fill_biome_list(int fd)
+t_biome_tree			*fill_biome_list(int fd)
 {
-	t_biome_list		*head;
+	t_biome_tree		*head;
 	char		*line;
 	// int			i;
 
@@ -148,9 +170,9 @@ t_biome_list			*fill_biome_list(int fd)
 	return (head);
 }
 
-t_biome_list		*new_biome_list(void)
+t_biome_tree		*new_biome_list(void)
 {
-	t_biome_list		*head;
+	t_biome_tree		*head;
 	int					fd;
 
 	if (access("data/biome_list", R_OK) == -1)
@@ -163,16 +185,18 @@ t_biome_list		*new_biome_list(void)
 	return (head);
 }
 
-t_biome_list		*manage_biome_list(int macro)
+t_biome_tree		*manage_biome_list(int macro)
 {
-	static t_biome_list		*head;
+	static t_biome_tree		*head;
 
 	if (macro == GET)
 		return (head);
 	else if (macro == NEW)
 		head = new_biome_list();
 	else if (macro == PRINT)
-		print_biome_list(head, 0);
+		print_biome_tree(head, 0);
+	else if (macro == ERROR)
+		print_error_biome_list(head, 0);
 	else
 		ft_printf("useless call to manage_biome_list\n");
 	return (NULL);

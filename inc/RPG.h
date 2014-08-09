@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPG.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Arno <Arno@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/08 21:45:24 by Arno             ###   ########.fr       */
+/*   Updated: 2014/08/09 07:30:25 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ typedef struct				s_calendar_list
 	struct s_calendar_list	*next;
 }							t_calendar_list;
 
-typedef struct				s_biome_list
+typedef struct				s_biome_tree
 {
 	char					*biome;
 	int						data;
-	struct s_biome_list		*next;
-	struct s_biome_list		*top;
+	struct s_biome_tree		*next;
+	struct s_biome_tree		*top;
 	int						id;
-}							t_biome_list;
+}							t_biome_tree;
 
 typedef struct				s_biome_conf
 {
@@ -86,6 +86,20 @@ typedef struct				s_heros_list
 	t_heros					*heros;
 	struct s_heros_list		*next;
 }							t_heros_list;
+
+typedef struct				s_job_conf
+{
+	char					*name;
+}							t_job_conf;
+
+typedef struct				s_job_tree
+{
+	char					*job_name;
+	int						id;
+	struct s_job_conf		*conf;
+	struct s_job_tree		*top;
+	struct s_job_tree		* next;
+}							t_job_tree;
 
 typedef struct				s_gameplay
 {
@@ -171,7 +185,7 @@ char						**create_map();
 /*
 ** manage_biome_list.c
 */
-t_biome_list				*manage_biome_list(int macro);
+t_biome_tree				*manage_biome_list(int macro);
 
 /*
 ** manage_bpoint_list.c
@@ -185,6 +199,17 @@ int							manage_hash(int macro, int nbr);
 int							ft_hash(char *line);
 
 /*
+** manage_job.c
+*/
+t_job_conf					*manage_job(int macro, char *name);
+void						print_job(t_job_conf *elem);
+
+/*
+** manage_job_list.c
+*/
+t_job_tree					*manage_job_list(int macro);
+
+/*
 ** map_point.c
 */
 void						collect_bpoint();
@@ -193,9 +218,9 @@ void						collect_bpoint();
 ** map_point_utility.c
 */
 void						draw_bpoint(char **map);
-int							count_gpoint(t_biome_list *ptr);
-t_biome_list				*get_biome_ptr(char *str);
-int							count_biome_top(t_biome_list *ptr);
+int							count_gpoint(t_biome_tree *ptr);
+t_biome_tree				*get_biome_ptr(char *str);
+int							count_biome_top(t_biome_tree *ptr);
 
 /*
 ** map_draw.c

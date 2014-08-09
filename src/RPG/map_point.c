@@ -6,13 +6,13 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/08/05 20:52:09 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/05 20:59:09 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/09 06:52:03 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <RPG.h>
 
-void		new_point(t_biome_list *tmp)
+void		new_point(t_biome_tree *tmp)
 {
 	int		x;
 	int		y;
@@ -24,14 +24,15 @@ void		new_point(t_biome_list *tmp)
 
 void		collect_wpoint()
 {
-	t_biome_list	*ptr;
-	t_biome_list	*tmp;
+	t_biome_tree	*ptr;
+	t_biome_tree	*tmp;
 	int				biome_rand;
 	int				i;
 
 	ptr = get_biome_ptr("water");
 	i = count_biome_top(ptr->top);
 	biome_rand = manage_hash(GET, i);
+	dprintf(2, "Wbiome_rand %d\n", biome_rand);
 
 	tmp = ptr->top;
 	i = biome_rand;
@@ -42,8 +43,8 @@ void		collect_wpoint()
 
 void		collect_gpoint()
 {
-	t_biome_list	*ptr;
-	t_biome_list	*tmp;
+	t_biome_tree	*ptr;
+	t_biome_tree	*tmp;
 	int				i;
 	int				biome_rand;
 
@@ -55,11 +56,16 @@ void		collect_gpoint()
 		tmp = tmp->next;
 	while (biome_rand)
 	{
-		while (tmp->data != LINE && tmp->data != CIRCLE)
-			tmp = tmp->next;
+		if (tmp == NULL)
+			tmp = ptr->top;
 		tmp = tmp->next;
+		while (tmp->data != LINE && tmp->data != CIRCLE)
+		{
+			tmp = tmp->next;
+		}
 		biome_rand -= 1;
 	}
+	dprintf(2, "return: %s\n", tmp->biome);
 	new_point(tmp);
 }
 
@@ -76,6 +82,7 @@ void		collect_bpoint()
 	wpt = manage_hash(GET, 6) + MAPSIZE / 5;
 	while (wpt)
 	{
+		dprintf(2, "Collect gpoint\n");
 		collect_gpoint();
 		wpt -= 1;
 	}

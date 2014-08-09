@@ -49,25 +49,18 @@ int					bget_color(char *line)
 char				bget_character(char *line)
 {
 	int				i;
-	int				j;
 
 	i = 0;
-	j = 0;
-	while (j < 3)
-	{
+	while (line[i] != ',')
 		i += 1;
-		while (line[i] != ',')
-			i += 1;
-		j += 1;
-	}
-	return (*(line + i + j - 1));
+	return (*(line + i + 2));
 }
 
 int					bget_id(char *name)
 {
-	t_biome_list	*ptr1;
-	t_biome_list	*ptr2;
-	t_biome_list	*head;
+	t_biome_tree	*ptr1;
+	t_biome_tree	*ptr2;
+	t_biome_tree	*head;
 
 	(void)name;
 	head = manage_biome_list(GET);

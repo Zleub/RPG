@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/16 02:11:30 by adebray           #+#    #+#             */
-/*   Updated: 2014/07/25 06:33:56 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/09 02:03:09 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 enum	e_manage
 {
-	GET, SET, NEW, ADD, LOAD, PRINT, FRESH, DELETE, NEW_B
+	GET, SET, NEW, ADD, LOAD, PRINT, FRESH, DELETE, NEW_B, ERROR
 };
 
 typedef struct				s_win_list

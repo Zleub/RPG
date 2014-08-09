@@ -1,8 +1,8 @@
-Wilderness {1, 0, 0, #}
-Plains {112, 0, 0, _}
-Forest {22, 0, 0, |}
-Hill {94, 0, 0, ^}
-Mountain {252, 0, 0, ^}
-Lac {44, 0, 0, ~}
-River {25, 0, 0, R}
-Desert {220, 0, 0, _}
+Wilderness {1, #}
+Plains {112, _}
+Forest {22, |}
+Hill {94, ^}
+Mountain {252, ^}
+Lac {44, ~}
+River {25, R}
+Desert {220, _}
