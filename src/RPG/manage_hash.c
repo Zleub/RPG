@@ -30,7 +30,7 @@ int		manage_hash(int macro, int nbr)
 	{
 		tmp = hash % nbr;
 		if (hash / nbr <= 5381)
-			hash = (hash / nbr) ^ inital;
+			hash = (hash / nbr) ^ initial;
 		else
 			hash = hash / nbr;
 		return (tmp);

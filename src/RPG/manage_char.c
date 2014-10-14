@@ -6,7 +6,7 @@
 /*   By: adebray <adebray@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/07/15 11:55:49 by adebray           #+#    #+#             */
-/*   Updated: 2014/08/09 17:43:10 by adebray          ###   ########.fr       */
+/*   Updated: 2014/08/27 19:22:07 by adebray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int					update_char_hash(t_heros *elem, int diviser)
 
 	tmp = elem->hash % diviser;
 	if (elem->hash / diviser <= 5381)
-		elem->hash = elem->hash / diviser ^ ;
+		elem->hash = elem->hash / diviser ^ 5381;
 	else
 		elem->hash = elem->hash / diviser;
 	return (tmp);
